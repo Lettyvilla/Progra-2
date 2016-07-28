@@ -22,7 +22,7 @@ public class HiloCaptura extends Thread{
     
     
     public void run() {
-        ColeccionDatos coleccion = new ColeccionDatos();
+        ColeccionDato coleccion = new ColeccionDato();
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         
