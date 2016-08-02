@@ -75,5 +75,26 @@ public class AdministradorArchivos {
         return null;
         
     }
-    
+   public String lecturaArchivoObtenerMetricas() {
+        if (fileIn != null) {
+            try {
+                int contadorLineas = 0;
+                int contadorCaracteres = 0;
+                String lineaLeida = fileIn.readLine();
+                while (lineaLeida != null) {
+                    contadorLineas++;
+                    contadorCaracteres += lineaLeida.length();
+                    lineaLeida = fileIn.readLine();
+                }
+                return "Cantidad Lineas: " + contadorLineas + "\n" 
+                        + "Cantidad Caracteres: " + contadorCaracteres;
+            }
+            catch (IOException ioe){
+                stdErr.println(ioe);
+                ioe.printStackTrace();
+            }            
+        }
+        return null;
+        
+    } 
 }
