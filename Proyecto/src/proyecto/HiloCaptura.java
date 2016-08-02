@@ -26,8 +26,9 @@ public class HiloCaptura extends Thread{
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         
-        String command2 = "powershell.exe Get-Service | "
-                + "Where-Object {$_.name -eq 'AdobeARMservice'}";
+        String command2 = 
+                "powershell.exe Get-Counter |"
+                + "-Counter \"\\memory\\available mbytes\" -MaxSamples 10 -SampleInterval 1";
 
         for (int i = 0; i < 10; i++) {
             Calendar cal = Calendar.getInstance();
