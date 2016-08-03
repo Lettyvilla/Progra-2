@@ -5,6 +5,11 @@
  */
 package proyecto;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
@@ -17,7 +22,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         configuracionVentana();
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -88,15 +93,18 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
-        Tabla venTabla=new Tabla();
+        Tabla venTabla = new Tabla();
     }//GEN-LAST:event_btnTablaActionPerformed
 
     private void btnCapturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
-        Captura venCaptura=new Captura();
+        JOptionPane.showMessageDialog(this, "Monitoreando :D");
+        PowerShell handler = new PowerShell();
+        handler.start();
+
     }//GEN-LAST:event_btnCapturaActionPerformed
 
     private void btnGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficoActionPerformed
-        Grafico venGratico= new Grafico();
+        Grafico venGratico = new Grafico();
     }//GEN-LAST:event_btnGraficoActionPerformed
 
 

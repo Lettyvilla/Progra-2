@@ -22,7 +22,7 @@ public class AdministradorArchivos {
     
     public void abrirArchivoEscritura(String fileName) {
         try {
-            FileWriter writer = new FileWriter(fileName, true);
+            FileWriter writer = new FileWriter(fileName);
             fileOut = new PrintWriter(writer, true);
         }
         catch (IOException ioe) {
