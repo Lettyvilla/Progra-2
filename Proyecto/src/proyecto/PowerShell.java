@@ -42,7 +42,7 @@ public class PowerShell extends Thread {
         datosFinales = new ColeccionDatos();
     }
 
-    public String llamarComando(int veces, int tiempo) throws IOException, InterruptedException {
+    public void llamarComando(int veces, int tiempo) throws IOException, InterruptedException {
         //crear hilo
 
         String resultado = "";
@@ -97,6 +97,5 @@ public class PowerShell extends Thread {
         archivo.abrirArchivoEscritura("distribucionDatos.csv");
         archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
         archivo.cerrarArchivoEscritura();
-        return resultado;
     }
 }
