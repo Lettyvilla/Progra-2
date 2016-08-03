@@ -3,16 +3,7 @@ package proyecto;
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author scerdass
- */
 public class ColeccionDatos {
 
     private ArrayList<String> lista;
@@ -32,7 +23,24 @@ public class ColeccionDatos {
             dato += "\n";
         }
         return dato;
-
+    }
+    
+    public int contarDato() {
+        return lista.size();
+    }
+    
+    public String obtenerDato(int posicion){
+        if ((posicion >= 0) && (posicion < lista.size())) {
+            return lista.get(posicion);
+        }
+        return null;
+    }
+    
+    public String eliminarStat(int posicion) {
+        if ((posicion >= 0) && (posicion < lista.size())) {
+            return lista.remove(posicion);
+        }
+        return null;
     }
 }
 
