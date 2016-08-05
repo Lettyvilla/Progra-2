@@ -31,11 +31,10 @@ public class PowerShell extends Thread {
     private final String USERTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% user time'";
     private final String PRIVILIGEDTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% privileged time'";
     private final String MEMORYUSED = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
-    private final String MEMORYTOTAL = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time", "MemoryUsed"};
-    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, MEMORYUSED};
+    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME,MEMORYUSED};
     private ColeccionDatos datosFinales = null;
 
     public PowerShell() {
@@ -43,14 +42,12 @@ public class PowerShell extends Thread {
     }
 
     public void llamarComando(int veces, int tiempo) throws IOException, InterruptedException {
-        //crear hilo
-
         String resultado = "";
-        int posNombre = 0;
         datosFinales.agregarDato("Fecha" + "," + "Estado" + "," + "Nombre");
-        for (String comando : comandos) {
+        for (int i = 0; i < veces; i++) {
             resultado += "\n";
-            for (int i = 0; i < veces; i++) {
+            int posNombre = 0;
+            for (String comando : comandos) {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Calendar cal = Calendar.getInstance();
                 String fechaHora = dateFormat.format(cal.getTime());
@@ -83,19 +80,20 @@ public class PowerShell extends Thread {
                     stdInput.readLine();
                     stdInput.readLine();
                     stdInput.readLine();
-                    stdInput.readLine();
+                    System.out.println(stdInput.readLine());
                     String[] result = stdInput.readLine().split(" ");
                     String estado = result[26];
                     resultado += estado + "\n";
                     datosFinales.agregarDato(fechaHora + "," + estado + "," + Procesos[posNombre]);
                 }
-                Thread.sleep(tiempo);
+                posNombre++;
             }
-            posNombre++;
+
         }
         AdministradorArchivos archivo = new AdministradorArchivos();
         archivo.abrirArchivoEscritura("distribucionDatos.csv");
         archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
         archivo.cerrarArchivoEscritura();
+        System.out.println("Checkeo finalizado");
     }
 }
