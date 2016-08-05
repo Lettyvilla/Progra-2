@@ -13,14 +13,12 @@ public class PowerShell extends Thread {
 
     @Override
     public void run() {
-        super.run(); //To change body of generated methods, choose Tools | Templates.
+        super.run(); 
         try {
             llamarComando(5, 2000);
 
-        } catch (IOException ex) {
-            Logger.getLogger(PowerShell.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(PowerShell.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -47,7 +45,6 @@ public class PowerShell extends Thread {
 
         String resultado = "";
         int posNombre = 0;
-        datosFinales.agregarDato("Fecha" + "," + "Estado" + "," + "Nombre");
         for (String comando : comandos) {
             resultado += "\n";
             for (int i = 0; i < veces; i++) {
@@ -57,6 +54,7 @@ public class PowerShell extends Thread {
                 Process powerShellProcess = Runtime.getRuntime().exec(comando);
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
                 String linea = "";
+                
                 if (Procesos[posNombre].equals("MemoryUsed")) {
                     long total_mem = 0;
                     while ((linea = stdInput.readLine()) != null) {
