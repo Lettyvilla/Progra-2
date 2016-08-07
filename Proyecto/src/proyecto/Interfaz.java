@@ -100,6 +100,7 @@ public class Interfaz extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Monitoreando :D");
         PowerShell handler = new PowerShell();
         handler.start();
+        btnCaptura.setEnabled(false);
 
     }//GEN-LAST:event_btnCapturaActionPerformed
 
