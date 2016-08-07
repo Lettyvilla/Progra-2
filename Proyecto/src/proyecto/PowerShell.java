@@ -87,12 +87,14 @@ public class PowerShell extends Thread {
                         break;
                     }
                     case "NetIn": {
-                       stdInput.readLine();
-                       stdInput.readLine();
-                       while ((linea = stdInput.readLine()) != null) {
-                           System.out.println("'"+linea+"'");                        
-                        }
                         long NetIn =0;
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        while ((linea = stdInput.readLine()) != null) {
+                           System.out.println(linea);  
+                           //NetIn += Long.valueOf(linea);
+                           
+                        }                        
                         datosFinales.agregarDato("," + NetIn);
                         posNombre++;
                         break;
