@@ -32,12 +32,12 @@ public class PowerShell extends Thread {
     private final String PRIVILIGEDTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% privileged time'";
     private final String MEMORYUSED = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
     private final String NETIN = "powershell.exe wmic path Win32_PerfRawData_Tcpip_NetworkInterface get BytesReceivedPersec";
-    private final String NETIOUT = "powershell.exe wmic path Win32_PerfRawData_Tcpip_NetworkInterface get BytesSentPersec";
+    private final String NETOUT = "powershell.exe wmic path Win32_PerfRawData_Tcpip_NetworkInterface get BytesSentPersec";
     private final String NETTOTAL = "powershell.exe wmic path Win32_PerfRawData_Tcpip_NetworkInterface get BytesTotalPersec";
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time", "Memory", "NetIn", "NetOut", "NetTotal"};
-    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, MEMORYUSED, NETIN};
+    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, MEMORYUSED, NETIN, NETOUT, NETTOTAL};
     private ColeccionDatos datosFinales = null;
 
     public PowerShell() {
@@ -90,13 +90,19 @@ public class PowerShell extends Thread {
                        stdInput.readLine();
                        stdInput.readLine();
                        while ((linea = stdInput.readLine()) != null) {
-                           System.out.print("'"+linea+"'");                        
+                           System.out.println("'"+linea+"'");                        
                         }
                         long NetIn =0;
                         datosFinales.agregarDato("," + NetIn);
                         posNombre++;
                         break;
 
+                    }
+                    case "NetOut": {
+                        break;
+                    }
+                    case "NetTotal": {
+                        break;
                     }
                     default: {
                         stdInput.readLine();
