@@ -13,9 +13,9 @@ public class PowerShell extends Thread {
 
     @Override
     public void run() {
-        super.run(); 
+        super.run();
         try {
-            llamarComando(5, 2000);
+            llamarComando(10, 2000);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class PowerShell extends Thread {
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time", "MemoryUsed"};
-    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME,MEMORYUSED};
+    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, MEMORYUSED};
     private ColeccionDatos datosFinales = null;
 
     public PowerShell() {
@@ -42,18 +42,19 @@ public class PowerShell extends Thread {
     public void llamarComando(int veces, int tiempo) throws IOException, InterruptedException {
         String resultado = "";
 
-        datosFinales.agregarDato("Fecha" + "," + "Estado" + "," + "Nombre");
-        for (int i=0;i<veces;i++) {
-            resultado += "\n";
+        for (int i = 0; i < veces; i++) {
+            //resultado += "\n";
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            String fechaHora = dateFormat.format(cal.getTime());
+            datosFinales.agregarDato(fechaHora);
+
             int posNombre = 0;
             for (String comando : comandos) {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Calendar cal = Calendar.getInstance();
-                String fechaHora = dateFormat.format(cal.getTime());
                 Process powerShellProcess = Runtime.getRuntime().exec(comando);
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
                 String linea = "";
-                
+
                 if (Procesos[posNombre].equals("MemoryUsed")) {
                     long total_mem = 0;
                     while ((linea = stdInput.readLine()) != null) {
@@ -72,9 +73,9 @@ public class PowerShell extends Thread {
                     String[] partes = linea.split(" ");
                     resultado = partes[26];
                     long mem_free = Long.valueOf(resultado);
-                    datosFinales.agregarDato(fechaHora + "," + total_mem + "," + "MemoryTotal");
+                    datosFinales.agregarDato("," + total_mem);
                     total_mem = total_mem - mem_free;
-                    datosFinales.agregarDato(fechaHora + "," + total_mem + "," + Procesos[posNombre]);
+                    datosFinales.agregarDato("," + total_mem);
 
                 } else {
                     stdInput.readLine();
@@ -83,11 +84,12 @@ public class PowerShell extends Thread {
                     System.out.println(stdInput.readLine());
                     String[] result = stdInput.readLine().split(" ");
                     String estado = result[26];
-                    resultado += estado + "\n";
-                    datosFinales.agregarDato(fechaHora + "," + estado + "," + Procesos[posNombre]);
+                    resultado += estado;
+                    datosFinales.agregarDato("," + estado);
                 }
                 posNombre++;
             }
+            datosFinales.agregarDato("\n");
 
         }
         AdministradorArchivos archivo = new AdministradorArchivos();
@@ -95,5 +97,5 @@ public class PowerShell extends Thread {
         archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
         archivo.cerrarArchivoEscritura();
         System.out.println("Checkeo finalizado");
-    }
+    }    
 }

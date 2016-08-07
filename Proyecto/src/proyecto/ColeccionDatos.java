@@ -20,7 +20,7 @@ public class ColeccionDatos {
         String dato = "";
         for (String d : lista) {
             dato += d;
-            dato += "\n";
+            dato += "\t";
         }
         return dato;
     }
