@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class PowerShell extends Thread {
 
@@ -15,7 +16,7 @@ public class PowerShell extends Thread {
     public void run() {
         super.run();
         try {
-            llamarComando(10, 2000);
+            llamarComando(3, 2000);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,6 +49,7 @@ public class PowerShell extends Thread {
             Calendar cal = Calendar.getInstance();
             String fechaHora = dateFormat.format(cal.getTime());
             datosFinales.agregarDato(fechaHora);
+            
 
             int posNombre = 0;
             for (String comando : comandos) {
@@ -96,6 +98,6 @@ public class PowerShell extends Thread {
         archivo.abrirArchivoEscritura("distribucionDatos.csv");
         archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
         archivo.cerrarArchivoEscritura();
-        System.out.println("Checkeo finalizado");
+        JOptionPane.showMessageDialog(null,"Checkeo finalizado");
     }    
 }
