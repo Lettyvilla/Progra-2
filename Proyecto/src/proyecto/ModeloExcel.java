@@ -6,17 +6,20 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.*;
 
         
 
 public class ModeloExcel {
 
-    Workbook wb;
-
-    public String Importar(File archivo, JTable tabla) {
+    Workbook wb = new HSSFWorkbook();
+    
+    
+    public String CrearFormulas(File archivo, JTable tabla) {
         String respuesta = "No se pudo hacer el calculo";
-
+        Sheet sheetFormulas = wb.createSheet();
+        
         DefaultTableModel modeloT = new DefaultTableModel();
         tabla.setModel(modeloT);
         try {

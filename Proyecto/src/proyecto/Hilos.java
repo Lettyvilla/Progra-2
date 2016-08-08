@@ -8,12 +8,12 @@ public class Hilos extends Thread {
     public void run() {
         super.run();
         try {
-            power.llamarComando(1, 2000);
+            power.llamarComando(10, 2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            power.llamarComandoCvs(1, 2000);
+            power.llamarComandoCvs(10, 2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
