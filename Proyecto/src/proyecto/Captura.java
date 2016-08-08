@@ -5,6 +5,8 @@
  */
 package proyecto;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
@@ -28,60 +30,75 @@ public class Captura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        boxDatos = new javax.swing.JComboBox<>();
+        boxDatos = new javax.swing.JComboBox<String>();
         lbDatos = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCaptura = new javax.swing.JButton();
+        btnsalir = new javax.swing.JButton();
 
-        boxDatos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxDatos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lbDatos.setText("Iniciar captura:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Captura de Datos");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCaptura.setText("Captura");
+        btnCaptura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCapturaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        btnsalir.setText("Volver ventana principal");
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnsalir))
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(141, 141, 141)
+                .addComponent(btnCaptura, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jButton1)
-                .addGap(40, 40, 40)
-                .addComponent(jButton2)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(btnCaptura, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCapturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Monitoreando :D");
+        Hilos hilo = new Hilos();
+        hilo.start();
+        btnCaptura.setEnabled(false);
+    }//GEN-LAST:event_btnCapturaActionPerformed
+
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose ();
+    }//GEN-LAST:event_btnsalirActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxDatos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCaptura;
+    private javax.swing.JButton btnsalir;
     private javax.swing.JLabel lbDatos;
     // End of variables declaration//GEN-END:variables
 
