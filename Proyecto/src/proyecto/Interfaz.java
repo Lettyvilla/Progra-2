@@ -97,9 +97,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTablaActionPerformed
 
     private void btnCapturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
-        JOptionPane.showMessageDialog(this, "Monitoreando :D");
-        PowerShell handler = new PowerShell();
-        handler.start();
+        CapturaDatos venCaptura = new CapturaDatos ();
+        venCaptura.setVisible(rootPaneCheckingEnabled);
 
     }//GEN-LAST:event_btnCapturaActionPerformed
 
