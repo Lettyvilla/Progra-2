@@ -19,11 +19,16 @@ public class PowerShell extends Thread {
     private final String PROCESSORTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% processor time'";
     private final String USERTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% user time'";
     private final String PRIVILIGEDTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% privileged time'";
+    private final String NETWORKIN = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes received/sec'";
+    private final String NETWORKPOUT = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes Sent/sec'";
+    private final String NETWORKTOTAL = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes Total/sec'";
     private final String MEMORYUSED = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
-        "Processor Time", "User Time", "Privilige Time", "MemoryUsed"};
-    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, MEMORYUSED};
+        "Processor Time", "User Time", "Privilige Time","NETWORKIN","NETWORKPOUT","NETWORKTOTAL","MemoryUsed"};
+    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, 
+        NETWORKIN, NETWORKPOUT, NETWORKTOTAL, MEMORYUSED};
+    
     private ColeccionDatos datosFinales = null;
     private ColeccionDatos datosFinales2 = null;
 
