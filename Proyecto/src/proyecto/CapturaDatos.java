@@ -18,6 +18,7 @@ public class CapturaDatos extends javax.swing.JFrame {
      */
     public CapturaDatos() {
         initComponents();
+        configuracionVentana();
     }
 
     /**
@@ -85,6 +86,11 @@ public class CapturaDatos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void configuracionVentana() {
+       this.setTitle("Captura de datos");
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
