@@ -16,6 +16,19 @@ public class ModeloExcel {
     Workbook wb = new HSSFWorkbook();
     
     
+    
+    public void creandoSheets (){
+        Sheet sheet1 = wb.getSheet("distribucionDatos");
+        Sheet sheet2 = wb.createSheet("Excel");
+        try{
+            FileOutputStream output = new FileOutputStream ("distribucionDatos.xls");
+            wb.write(output);
+            output.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public String CrearFormulas(File archivo, JTable tabla) {
         String respuesta = "No se pudo hacer el calculo";
         Sheet sheetFormulas = wb.createSheet();
@@ -68,7 +81,7 @@ public class ModeloExcel {
     public String Exportar (File archivo, JTable tabla){
         String respuesta = "No se pueden mostrar los resultados";
         int numFila = tabla.getRowCount(), numColumna = tabla.getColumnCount();
-        if (archivo.getName().endsWith(".csv")){
+        if (archivo.getName().endsWith(".lxs")){
             wb = new HSSFWorkbook();
         } else {
             wb = new XSSFWorkbook();

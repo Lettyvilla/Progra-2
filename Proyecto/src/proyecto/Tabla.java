@@ -115,7 +115,7 @@ public class Tabla extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-        me.CrearFormulas(null, jtDatos);
+        me.creandoSheets();
         
     }//GEN-LAST:event_btnCalcularActionPerformed
 
