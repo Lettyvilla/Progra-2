@@ -8,8 +8,17 @@ public class ColeccionDatos {
 
     private ArrayList<String> lista;
     
+    private static ColeccionDatos singletonInstance;
+    
     public ColeccionDatos() {
         lista = new ArrayList<String>();
+    }
+    
+    public static ColeccionDatos getsingletonInstance (){
+    if (singletonInstance == null){
+         singletonInstance = new ColeccionDatos();
+    }
+    return singletonInstance;
     }
 
     public boolean agregarDato(String dato) {

@@ -7,23 +7,18 @@ public class Hilos extends Thread {
     @Override
     public void run() {
         super.run();
-        try {
-<<<<<<< HEAD
-            power.llamarComando(1, 2000);
-=======
+        /*try {
             power.Encabezados();
             power.llamarComando(1,1000);
->>>>>>> origin/master
+
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         try {
-<<<<<<< HEAD
-            power.llamarComandoCvs(1, 2000);
-=======
+
             power.EncabezadosCsv();
-            power.llamarComandoCsv(1,1000);
->>>>>>> origin/master
+            power.llamarComandoCsv(3,1000);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
