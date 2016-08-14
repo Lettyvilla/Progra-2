@@ -62,7 +62,7 @@ public class AdministradorArchivos {
                 String lineaLeida = fileIn.readLine();
                 while (lineaLeida != null) {
                     totalLeido += lineaLeida;
-                    totalLeido += "\n";
+                    totalLeido += "\t";
                     lineaLeida = fileIn.readLine();
                 }
                 return totalLeido;

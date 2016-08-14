@@ -67,12 +67,13 @@ public class PowerShell extends Thread {
                     stdInput.readLine();
                     stdInput.readLine();
                     stdInput.readLine();
-                    System.out.println(stdInput.readLine());
+                    stdInput.readLine();
+                    //System.out.println(stdInput.readLine());
                     linea = stdInput.readLine();
                     String[] partes = linea.split(" ");
                     resultado = partes[26];
                     long mem_free = Long.valueOf(resultado);
-                    datosFinales.agregarDato("" + total_mem);
+                    datosFinales.agregarDato(""+total_mem);
                     total_mem = total_mem - mem_free;
                     datosFinales.agregarDato(""+ total_mem);
 
@@ -80,11 +81,12 @@ public class PowerShell extends Thread {
                     stdInput.readLine();
                     stdInput.readLine();
                     stdInput.readLine();
+                    //stdInput.readLine();
                     System.out.println(stdInput.readLine());
                     String[] result = stdInput.readLine().split(" ");
                     String estado = result[26];
                     resultado += estado;
-                    datosFinales.agregarDato(estado);
+                    datosFinales.agregarDato(estado.trim());
                 }
                 posNombre++;
             }
@@ -96,7 +98,7 @@ public class PowerShell extends Thread {
         archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
         archivo.cerrarArchivoEscritura();
     }    
-    public void llamarComandoCvs(int veces, int tiempo) throws IOException, InterruptedException {
+    public void llamarComandoCsv(int veces, int tiempo) throws IOException, InterruptedException {
         String resultado = " ";
 
         for (int i = 0; i < veces; i++) {
@@ -126,24 +128,27 @@ public class PowerShell extends Thread {
                     stdInput.readLine();
                     stdInput.readLine();
                     stdInput.readLine();
-                    System.out.println(stdInput.readLine());
+                    stdInput.readLine();
+                    //System.out.println(stdInput.readLine());
                     linea = stdInput.readLine();
                     String[] partes = linea.split(" ");
                     resultado = partes[26];
                     long mem_free = Long.valueOf(resultado);
-                    datosFinales2.agregarDato("," + total_mem);
+                    datosFinales2.agregarDato(","+ total_mem);
                     total_mem = total_mem - mem_free;
-                    datosFinales2.agregarDato("," + total_mem);
+                    datosFinales2.agregarDato(","+ total_mem);
 
                 } else {
                     stdInput.readLine();
                     stdInput.readLine();
                     stdInput.readLine();
+                    //stdInput.readLine();
                     System.out.println(stdInput.readLine());
                     String[] result = stdInput.readLine().split(" ");
                     String estado = result[26];
                     resultado += estado;
-                    datosFinales2.agregarDato("," + estado);
+                    //long num = Long.parseLong(estado);
+                    datosFinales2.agregarDato(","+estado.trim());
                 }
                 posNombre++;
             }
@@ -152,7 +157,7 @@ public class PowerShell extends Thread {
         }
         AdministradorArchivos archivo = new AdministradorArchivos();
         archivo.abrirArchivoEscritura("distribucionDatos.csv");
-        archivo.escribirContenidoArchivo(datosFinales2.devolverContenido());
+        archivo.escribirContenidoArchivo(datosFinales2.devolverContenidoCsv());
         archivo.cerrarArchivoEscritura();
         JOptionPane.showMessageDialog(null,"Checkeo finalizado 2");
     } 
