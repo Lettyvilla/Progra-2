@@ -16,11 +16,19 @@ public class ColeccionDatos {
         return lista.add(dato);
     }
     
+    public String devolverContenidoCsv() {
+        String dato = "";
+        for (String d : lista) {
+            dato += d;            
+        }
+        return dato;
+    }
+    
     public String devolverContenido() {
         String dato = "";
         for (String d : lista) {
-            dato += d;
-            dato += "\t";
+            dato += d+"\t";
+            //dato += "\t";
         }
         return dato;
     }
