@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.io.File;
 
 public class PowerShell extends Thread {
 
@@ -26,13 +25,13 @@ public class PowerShell extends Thread {
     private final String MEMORYUSED = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
-        "Processor Time", "User Time", "Privilige Time", "NETWORKIN", "NETWORKPOUT", "NETWORKTOTAL", "MemoryUsed"};
-    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME,
+        "Processor Time", "User Time", "Privilige Time","NETWORKIN","NETWORKPOUT","NETWORKTOTAL","MemoryUsed"};
+    private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, PRIVILIGEDTIME, 
         NETWORKIN, NETWORKPOUT, NETWORKTOTAL, MEMORYUSED};
-
-    private final String[] encabezados = {"Fecha y Hora", "DiskRead", "DiskWrite", "DiskTransfer",
-        "Processor Time", "User Time", "Privilige Time", "Network IN", "Network OUT", "Network TOTAL", "Memory Total", "Memory Used"};
-
+    
+     private final String[] encabezados = {"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
+        "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
+    
     private ColeccionDatos datosFinales = null;
     private ColeccionDatos datosFinales2 = null;
 
@@ -40,17 +39,17 @@ public class PowerShell extends Thread {
         datosFinales = new ColeccionDatos();
         datosFinales2 = new ColeccionDatos();
     }
-
-    public void Encabezados() {
-        for (int i = 0; i < encabezados.length; i++) {
-            datosFinales.agregarDato(encabezados[i]);
+    
+    public void Encabezados(){
+        for (int i =0;i<encabezados.length;i++){        
+        datosFinales.agregarDato(encabezados[i]);
         }
         datosFinales.agregarDato("\n");
     }
-
-    public void EncabezadosCsv() {
-        for (int i = 0; i < encabezados.length; i++) {
-            datosFinales2.agregarDato(encabezados[i] + ",");
+    
+    public void EncabezadosCsv(){
+        for (int i =0;i<encabezados.length;i++){
+        datosFinales2.agregarDato(encabezados[i]+",");        
         }
         datosFinales2.agregarDato("\n");
     }
@@ -64,6 +63,7 @@ public class PowerShell extends Thread {
             Calendar cal = Calendar.getInstance();
             String fechaHora = dateFormat.format(cal.getTime());
             datosFinales.agregarDato(fechaHora);
+            
 
             int posNombre = 0;
             for (String comando : comandos) {
@@ -90,9 +90,9 @@ public class PowerShell extends Thread {
                     String[] partes = linea.split(" ");
                     resultado = partes[26];
                     long mem_free = Long.valueOf(resultado);
-                    datosFinales.agregarDato(total_mem + "");
+                    datosFinales.agregarDato(total_mem+"");
                     total_mem = total_mem - mem_free;
-                    datosFinales.agregarDato(total_mem + "");
+                    datosFinales.agregarDato(total_mem+"");
 
                 } else {
                     stdInput.readLine();
@@ -108,14 +108,13 @@ public class PowerShell extends Thread {
                 posNombre++;
             }
             datosFinales.agregarDato("\n");
-
+            
         }
         AdministradorArchivos archivo = new AdministradorArchivos();
         archivo.abrirArchivoEscritura("distribucionDatos.xls");
         archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
         archivo.cerrarArchivoEscritura();
-    }
-
+    }    
     public void llamarComandoCsv(int veces, int tiempo) throws IOException, InterruptedException {
         String resultado = " ";
 
@@ -124,7 +123,8 @@ public class PowerShell extends Thread {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             String fechaHora = dateFormat.format(cal.getTime());
-            datosFinales2.agregarDato(fechaHora + ",");
+            datosFinales2.agregarDato(fechaHora+",");
+            
 
             int posNombre = 0;
             for (String comando : comandos) {
@@ -151,9 +151,9 @@ public class PowerShell extends Thread {
                     String[] partes = linea.split(" ");
                     resultado = partes[26];
                     long mem_free = Long.valueOf(resultado);
-                    datosFinales2.agregarDato(total_mem + ",");
+                    datosFinales2.agregarDato(total_mem+",");
                     total_mem = total_mem - mem_free;
-                    datosFinales2.agregarDato(total_mem + ",");
+                    datosFinales2.agregarDato(total_mem+",");
 
                 } else {
                     stdInput.readLine();
@@ -165,19 +165,17 @@ public class PowerShell extends Thread {
                     String estado = result[26];
                     resultado += estado;
                     //long num = Long.parseLong(estado);
-                    datosFinales2.agregarDato(estado.trim() + ",");
+                    datosFinales2.agregarDato(estado.trim()+",");
                 }
                 posNombre++;
             }
             datosFinales2.agregarDato("\n");
-
+            
         }
         AdministradorArchivos archivo = new AdministradorArchivos();
         archivo.abrirArchivoEscritura("distribucionDatos.csv");
         archivo.escribirContenidoArchivo(datosFinales2.devolverContenidoCsv());
         archivo.cerrarArchivoEscritura();
-        JOptionPane.showMessageDialog(null, "Checkeo finalizado 2");
-
-    }
-    
+        JOptionPane.showMessageDialog(null,"Checkeo finalizado 2");
+    } 
 }
