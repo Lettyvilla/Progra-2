@@ -5,6 +5,10 @@
  */
 package proyecto;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.ss.formula.eval.EvaluationException;
+
 /**
  *
  * @author Carlos
@@ -12,6 +16,8 @@ package proyecto;
 public class Tabla extends javax.swing.JFrame {
     ModeloExcel me = new ModeloExcel ();
     Formulas For = new Formulas ();
+    Hilos hilos = new Hilos();
+    
     /**
      * Creates new form Tabla
      */
@@ -115,9 +121,7 @@ public class Tabla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        // TODO add your handling code here:
-        For.creandoFormulas();
-        
+        For.file();
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosActionPerformed

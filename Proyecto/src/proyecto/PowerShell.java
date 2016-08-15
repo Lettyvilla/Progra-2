@@ -10,6 +10,10 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public class PowerShell extends Thread {
 
@@ -31,18 +35,25 @@ public class PowerShell extends Thread {
     
      private final String[] encabezados = {"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
+     
+     private final String[] encabezadosxls = {"Bienvenidos","Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
+        "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
     
     private ColeccionDatos datosFinales = null;
     private ColeccionDatos datosFinales2 = null;
+    
+    
+    Workbook wb = new HSSFWorkbook();
 
     public PowerShell() {
         datosFinales = new ColeccionDatos();
         datosFinales2 = new ColeccionDatos();
+        
     }
     
     public void Encabezados(){
-        for (int i =0;i<encabezados.length;i++){        
-        datosFinales.agregarDato(encabezados[i]);
+        for (int i =0;i<encabezadosxls.length;i++){        
+        datosFinales.agregarDato(encabezadosxls[i]);
         }
         datosFinales.agregarDato("\n");
     }
@@ -54,67 +65,7 @@ public class PowerShell extends Thread {
         datosFinales2.agregarDato("\n");
     }
 
-    public void llamarComando(int veces, int tiempo) throws IOException, InterruptedException {
-        String resultado = " ";
-
-        for (int i = 0; i < veces; i++) {
-            //resultado += "\n";
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Calendar cal = Calendar.getInstance();
-            String fechaHora = dateFormat.format(cal.getTime());
-            datosFinales.agregarDato(fechaHora);
-            
-
-            int posNombre = 0;
-            for (String comando : comandos) {
-                Process powerShellProcess = Runtime.getRuntime().exec(comando);
-                BufferedReader stdInput = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
-                String linea = "";
-
-                if (Procesos[posNombre].equals("MemoryUsed")) {
-                    long total_mem = 0;
-                    while ((linea = stdInput.readLine()) != null) {
-                        total_mem = total_mem + Long.valueOf(linea);
-                    }
-                    total_mem = ((total_mem / 1024) / 1024);
-                    String command3 = "powershell.exe Get-Counter '" + "\\" + "memory" + "\\" + "available mbytes'";
-                    powerShellProcess = Runtime.getRuntime().exec(command3);
-                    stdInput = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
-                    linea = "";
-                    stdInput.readLine();
-                    stdInput.readLine();
-                    stdInput.readLine();
-                    stdInput.readLine();
-                    //System.out.println(stdInput.readLine());
-                    linea = stdInput.readLine();
-                    String[] partes = linea.split(" ");
-                    resultado = partes[26];
-                    long mem_free = Long.valueOf(resultado);
-                    datosFinales.agregarDato(total_mem+"");
-                    total_mem = total_mem - mem_free;
-                    datosFinales.agregarDato(total_mem+"");
-
-                } else {
-                    stdInput.readLine();
-                    stdInput.readLine();
-                    stdInput.readLine();
-                    //stdInput.readLine();
-                    System.out.println(stdInput.readLine());
-                    String[] result = stdInput.readLine().split(" ");
-                    String estado = result[26];
-                    resultado += estado;
-                    datosFinales.agregarDato(estado.trim());
-                }
-                posNombre++;
-            }
-            datosFinales.agregarDato("\n");
-            
-        }
-        AdministradorArchivos archivo = new AdministradorArchivos();
-        archivo.abrirArchivoEscritura("distribucionDatos.xls");
-        archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
-        archivo.cerrarArchivoEscritura();
-    }    
+  
     public void llamarComandoCsv(int veces, int tiempo) throws IOException, InterruptedException {
         String resultado = " ";
 
@@ -178,4 +129,68 @@ public class PowerShell extends Thread {
         archivo.cerrarArchivoEscritura();
         JOptionPane.showMessageDialog(null,"Checkeo finalizado 2");
     } 
+        public void llamarComando(int veces, int tiempo) throws IOException, InterruptedException {
+        String resultado = " ";
+
+        for (int i = 0; i < veces; i++) {
+            //resultado += "\n";
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            String fechaHora = dateFormat.format(cal.getTime());
+            datosFinales.agregarDato(fechaHora);
+            
+
+            int posNombre = 0;
+            for (String comando : comandos) {
+                Process powerShellProcess = Runtime.getRuntime().exec(comando);
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
+                String linea = "";
+
+                if (Procesos[posNombre].equals("MemoryUsed")) {
+                    long total_mem = 0;
+                    while ((linea = stdInput.readLine()) != null) {
+                        total_mem = total_mem + Long.valueOf(linea);
+                    }
+                    total_mem = ((total_mem / 1024) / 1024);
+                    String command3 = "powershell.exe Get-Counter '" + "\\" + "memory" + "\\" + "available mbytes'";
+                    powerShellProcess = Runtime.getRuntime().exec(command3);
+                    stdInput = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
+                    linea = "";
+                    stdInput.readLine();
+                    stdInput.readLine();
+                    stdInput.readLine();
+                    stdInput.readLine();
+                    //System.out.println(stdInput.readLine());
+                    linea = stdInput.readLine();
+                    String[] partes = linea.split(" ");
+                    resultado = partes[26];
+                    long mem_free = Long.valueOf(resultado);
+                    datosFinales.agregarDato(total_mem+"");
+                    total_mem = total_mem - mem_free;
+                    datosFinales.agregarDato(total_mem+"");
+
+                } else {
+                    stdInput.readLine();
+                    stdInput.readLine();
+                    stdInput.readLine();
+                    //stdInput.readLine();
+                    System.out.println(stdInput.readLine());
+                    String[] result = stdInput.readLine().split(" ");
+                    String estado = result[26];
+                    resultado += estado;
+                    datosFinales.agregarDato(estado.trim());
+                }
+                posNombre++;
+            }
+            datosFinales.agregarDato("\n");
+            
+        }
+        
+        AdministradorArchivos archivo = new AdministradorArchivos();
+        archivo.abrirArchivoEscritura("distribucionDatos.xls");
+        archivo.escribirContenidoArchivo(datosFinales.devolverContenido());
+        archivo.cerrarArchivoEscritura();
+    }  
+        
+        
 }

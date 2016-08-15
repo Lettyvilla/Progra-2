@@ -7,13 +7,13 @@ public class Hilos extends Thread {
     @Override
     public void run() {
         super.run();
-        /*try {
+        try {
             power.Encabezados();
-            power.llamarComando(1,1000);
+            power.llamarComando(4,1000);
 
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         try {
 
             power.EncabezadosCsv();

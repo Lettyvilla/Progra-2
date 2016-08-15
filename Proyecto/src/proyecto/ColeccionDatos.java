@@ -42,6 +42,15 @@ public class ColeccionDatos {
         return dato;
     }
     
+    public String devolverContenidoFormula() {
+        String dato = "";
+        for (String d : lista) {
+            dato += d+"\t";
+            //dato += "\t";
+        }
+        return dato;
+    }
+    
     public int contarDato() {
         return lista.size();
     }
