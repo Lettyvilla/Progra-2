@@ -21,7 +21,7 @@ public class ColeccionDatos {
     return singletonInstance;
     }
 
-    public boolean agregarDato(String dato) {
+    public synchronized boolean agregarDato(String dato) {
         return lista.add(dato);
     }
     
@@ -36,20 +36,12 @@ public class ColeccionDatos {
     public String devolverContenido() {
         String dato = "";
         for (String d : lista) {
-            dato += d+"\t";
-            //dato += "\t";
+            dato += d ;
+            dato += " ";
         }
         return dato;
     }
-    
-    public String devolverContenidoFormula() {
-        String dato = "";
-        for (String d : lista) {
-            dato += d+"\t";
-            //dato += "\t";
-        }
-        return dato;
-    }
+   
     
     public int contarDato() {
         return lista.size();

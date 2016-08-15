@@ -10,7 +10,7 @@ public class Hilos extends Thread {
         try {
             
             power.Encabezados();
-            power.llamarComando(4,1000);
+            power.llamarComando(2,1000);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -18,7 +18,7 @@ public class Hilos extends Thread {
         try {
 
             power.EncabezadosCsv();
-            power.llamarComandoCsv(3,1000);
+            power.llamarComandoCsv(2,1000);
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -41,7 +41,7 @@ public class PowerShell extends Thread {
      private final String[] encabezados = {"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
      
-     private final String[] encabezadosxls = {"Bienvenidos","Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
+     private final String[] encabezadosxls = {"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
     
     private ColeccionDatos datosFinales = null;
@@ -192,16 +192,31 @@ public class PowerShell extends Thread {
             datosFinales.agregarDato("\n");
             
         }
-        
-       AdministradorArchivos archivos = new AdministradorArchivos();
+        String contenidoExcel = datosFinales.devolverContenido();
         File archivo = new File("Metricas.xls");
         Workbook workbook = new HSSFWorkbook();
-        Sheet pagina1 = workbook.createSheet("Metricas");
-        archivos.escribirContenidoArchivo(datosFinales.devolverContenido());
         Sheet pagina = workbook.createSheet("Tabla Metricas");
         Row fila = pagina.createRow(0);
         int rowCount = 0;
         int cellCount = 2;
+       
+        String[] lineas = contenidoExcel.split("\n");
+        for (int row = 0; row < lineas.length; row++){
+            fila = pagina.createRow(row + 1);
+            rowCount = row + 1;
+            String[] datos = lineas[row].split(",");
+            for (int cells = 0; cells < datos.length; cells++) {
+                if (cells == 0) {
+                    Cell celda = fila.createCell(cells);
+                    celda.setCellValue(datos[cells]);
+                    cellCount = cells;
+                } else {
+                    Cell celda = fila.createCell(cells);
+                    celda.setCellValue(Double.parseDouble(datos[cells]));
+                    cellCount = cells;
+                }
+            }
+        }
 
         /* una vez que las metricas que capturan y se ponen en el archivo de excel se revisa en el
         archivo de excel donde van las formulas y se ponen manual*/
