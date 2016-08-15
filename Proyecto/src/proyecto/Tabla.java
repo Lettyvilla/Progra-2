@@ -11,6 +11,7 @@ package proyecto;
  */
 public class Tabla extends javax.swing.JFrame {
     ModeloExcel me = new ModeloExcel ();
+    Formulas For = new Formulas ();
     /**
      * Creates new form Tabla
      */
@@ -115,7 +116,7 @@ public class Tabla extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-        me.CrearFormulas(null, jtDatos);
+        For.creandoFormulas();
         
     }//GEN-LAST:event_btnCalcularActionPerformed
 
