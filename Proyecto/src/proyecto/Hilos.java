@@ -9,19 +9,16 @@ public class Hilos extends Thread {
         super.run();
         try {
             
-            power.EncabezadosCsv();
-            power.llamarComandoCsv(3,1000);
+            power.Encabezados();
+            power.llamarComando(4,1000);
             
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
 
-            power.Encabezados();
-            power.llamarComando(4,1000);
-
-            
+            power.EncabezadosCsv();
+            power.llamarComandoCsv(3,1000);
             
         } catch (Exception e) {
             e.printStackTrace();

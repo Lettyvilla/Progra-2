@@ -22,11 +22,6 @@ public class Formulas {
         
       
         Sheet sheet0 = wb.createSheet("copy");
-        AdministradorArchivos archivos = new AdministradorArchivos ();
-        archivos.abrirArchivoLectura("distribucionDatos.csv");
-        archivos.abrirArchivoEscritura("copy");
-        
-       
         
         Sheet sheet = wb.createSheet("Formulas");
         

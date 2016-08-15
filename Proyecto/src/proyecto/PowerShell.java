@@ -264,27 +264,27 @@ public class PowerShell extends Thread {
                     Cell celdaA2 = fila.createCell(0);
                     celdaA2.setCellValue(formulas[2]);
                     Cell celdaB2 = fila.createCell(1);
-                    celdaB2.setCellValue("PERCENTILE(B2:B31;95%)");
+                    celdaB2.setCellValue("=PERCENTILE(B2:B31,95%)");
                     Cell celdaC2 = fila.createCell(2);
-                    celdaC2.setCellValue("PERCENTILE(C2:C31;95%)");
+                    celdaC2.setCellValue("=PERCENTILE(C2:C31,95%)");
                     Cell celdaD2 = fila.createCell(3);
-                    celdaD2.setCellValue("PERCENTILE(D2:D31;95%)");
+                    celdaD2.setCellValue("=PERCENTILE(D2:D31,95%)");
                     Cell celdaE2 = fila.createCell(4);
-                    celdaE2.setCellValue("PERCENTILE(E2:E31;95%)");
+                    celdaE2.setCellValue("=PERCENTILE(E2:E31,95%)");
                     Cell celdaF2 = fila.createCell(5);
-                    celdaF2.setCellValue("PERCENTILE(F2:F31;95%)");
+                    celdaF2.setCellValue("=PERCENTILE(F2:F31,95%)");
                     Cell celdaG2 = fila.createCell(6);
-                    celdaG2.setCellValue("PERCENTILE(G2:G31;95%)");
+                    celdaG2.setCellValue("=PERCENTILE(G2:G31,95%)");
                     Cell celdaH2 = fila.createCell(7);
-                    celdaH2.setCellValue("PERCENTILE(H2:H31;95%)");
+                    celdaH2.setCellValue("=PERCENTILE(H2:H31,95%)");
                     Cell celdaI2 = fila.createCell(8);
-                    celdaI2.setCellValue("PERCENTILE(I2:I31;95%)");
+                    celdaI2.setCellValue("=PERCENTILE(I2:I31,95%)");
                     Cell celdaJ2 = fila.createCell(9);
-                    celdaJ2.setCellValue("PERCENTILE(J2:J31;95%)");
+                    celdaJ2.setCellValue("=PERCENTILE(J2:J31,95%)");
                     Cell celdaK2 = fila.createCell(10);
-                    celdaK2.setCellValue("PERCENTILE(K2:K31;95%)");
+                    celdaK2.setCellValue("=PERCENTILE(K2:K31,95%)");
                     Cell celdaL2 = fila.createCell(11);
-                    celdaL2.setCellValue("PERCENTILE(L2:L31;95%)");
+                    celdaL2.setCellValue("=PERCENTILE(L2:L31,95%)");
                     break;
                 case 3:
                     Cell celdaA3 = fila.createCell(0);
@@ -340,7 +340,6 @@ public class PowerShell extends Thread {
                     break;    
                 default:
                     break;
-     
             }
         }
         
@@ -358,9 +357,8 @@ public class PowerShell extends Thread {
             stdErr.println(fnfe);
             fnfe.printStackTrace();
         }
-    
     }
-    }  
+}  
         
         
 
