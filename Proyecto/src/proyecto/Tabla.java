@@ -14,9 +14,8 @@ import org.apache.poi.ss.formula.eval.EvaluationException;
  * @author Carlos
  */
 public class Tabla extends javax.swing.JFrame {
-    ModeloExcel me = new ModeloExcel ();
     Formulas For = new Formulas ();
-    Hilos hilos = new Hilos();
+    
     
     /**
      * Creates new form Tabla
@@ -121,12 +120,13 @@ public class Tabla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        For.file();
+        For.Creando();
+        
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosActionPerformed
         // TODO add your handling code here:
-        me.Exportar(null, jtDatos);
+        
         
     }//GEN-LAST:event_btnResultadosActionPerformed
 
