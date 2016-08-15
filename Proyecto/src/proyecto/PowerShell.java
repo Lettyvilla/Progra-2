@@ -41,8 +41,8 @@ public class PowerShell extends Thread {
      private final String[] encabezados = {"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
      
-     private final String[] encabezadosxls = {"Bievenido" ,"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
-        "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
+     private final String[] encabezadosxls = {"Bievenido" ,"Fecha&Hora","DiskRead", "DiskWrite", "DiskTransfer",
+        "Processor_Time", "User_Time", "Privilige_Time","Network_IN","Network_OUT","Network_TOTAL","Memory_Total", "Memory_Used"};
     
     private ColeccionDatos datosFinales = null;
     private ColeccionDatos datosFinales2 = null;
@@ -212,7 +212,7 @@ public class PowerShell extends Thread {
                     cellCount = cells;
                 } else {
                     Cell celda = fila.createCell(cells);
-                    celda.setCellValue((datos[cells]));
+                    celda.setCellValue(Double.parseDouble(datos[cells]));
                     cellCount = cells;
                 }
             }
