@@ -81,7 +81,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnGraficar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGraficarProcesador" min="-2" max="-2" attributes="0"/>
                       <Component id="rbtnIdleTime" min="-2" max="-2" attributes="0"/>
                       <Component id="rbtnSystemTime" min="-2" max="-2" attributes="0"/>
                       <Component id="rbtnUserTime" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -100,7 +100,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rbtnUserTime" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnGraficar" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGraficarProcesador" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -128,12 +128,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnUserTimeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGraficar">
+        <Component class="javax.swing.JButton" name="btnGraficarProcesador">
           <Properties>
             <Property name="text" type="java.lang.String" value="Graficar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarProcesadorActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -160,7 +160,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnGraficar1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGraficarMemoria" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -181,7 +181,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rbtnUsedMemory" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnGraficar1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGraficarMemoria" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -204,10 +204,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnUsedMemoryActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGraficar1">
+        <Component class="javax.swing.JButton" name="btnGraficarMemoria">
           <Properties>
             <Property name="text" type="java.lang.String" value="Graficar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarMemoriaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -226,7 +229,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnGraficar3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGraficarRed" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rbtnNetOut" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rbtnNetIN" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rbtnNetTotal" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -245,7 +248,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rbtnNetTotal" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnGraficar3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGraficarRed" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -273,10 +276,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnNetTotalActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGraficar3">
+        <Component class="javax.swing.JButton" name="btnGraficarRed">
           <Properties>
             <Property name="text" type="java.lang.String" value="Graficar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarRedActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

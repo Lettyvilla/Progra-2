@@ -1,9 +1,16 @@
 package proyecto;
 
 import java.awt.Panel;
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -22,10 +29,12 @@ import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class Grafico extends javax.swing.JFrame {
+
     public Grafico() {
         initComponents();
         configuracionVentana();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,17 +43,17 @@ public class Grafico extends javax.swing.JFrame {
         rbtnSystemTime = new javax.swing.JRadioButton();
         rbtnIdleTime = new javax.swing.JRadioButton();
         rbtnUserTime = new javax.swing.JRadioButton();
-        btnGraficar = new javax.swing.JButton();
+        btnGraficarProcesador = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jplMemory = new javax.swing.JPanel();
         rbtnTotalMemory = new javax.swing.JRadioButton();
         rbtnUsedMemory = new javax.swing.JRadioButton();
-        btnGraficar1 = new javax.swing.JButton();
+        btnGraficarMemoria = new javax.swing.JButton();
         jplRed = new javax.swing.JPanel();
         rbtnNetIN = new javax.swing.JRadioButton();
         rbtnNetOut = new javax.swing.JRadioButton();
         rbtnNetTotal = new javax.swing.JRadioButton();
-        btnGraficar3 = new javax.swing.JButton();
+        btnGraficarRed = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -67,10 +76,10 @@ public class Grafico extends javax.swing.JFrame {
             }
         });
 
-        btnGraficar.setText("Graficar");
-        btnGraficar.addActionListener(new java.awt.event.ActionListener() {
+        btnGraficarProcesador.setText("Graficar");
+        btnGraficarProcesador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficarActionPerformed(evt);
+                btnGraficarProcesadorActionPerformed(evt);
             }
         });
 
@@ -81,7 +90,7 @@ public class Grafico extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplProcesadorLayout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jplProcesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGraficar)
+                    .addComponent(btnGraficarProcesador)
                     .addComponent(rbtnIdleTime)
                     .addComponent(rbtnSystemTime)
                     .addComponent(rbtnUserTime))
@@ -97,7 +106,7 @@ public class Grafico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(rbtnUserTime)
                 .addGap(18, 18, 18)
-                .addComponent(btnGraficar)
+                .addComponent(btnGraficarProcesador)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -124,7 +133,12 @@ public class Grafico extends javax.swing.JFrame {
             }
         });
 
-        btnGraficar1.setText("Graficar");
+        btnGraficarMemoria.setText("Graficar");
+        btnGraficarMemoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficarMemoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jplMemoryLayout = new javax.swing.GroupLayout(jplMemory);
         jplMemory.setLayout(jplMemoryLayout);
@@ -132,7 +146,7 @@ public class Grafico extends javax.swing.JFrame {
             jplMemoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplMemoryLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGraficar1)
+                .addComponent(btnGraficarMemoria)
                 .addGap(46, 46, 46))
             .addGroup(jplMemoryLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -149,7 +163,7 @@ public class Grafico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(rbtnUsedMemory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGraficar1)
+                .addComponent(btnGraficarMemoria)
                 .addContainerGap())
         );
 
@@ -171,7 +185,12 @@ public class Grafico extends javax.swing.JFrame {
             }
         });
 
-        btnGraficar3.setText("Graficar");
+        btnGraficarRed.setText("Graficar");
+        btnGraficarRed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficarRedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jplRedLayout = new javax.swing.GroupLayout(jplRed);
         jplRed.setLayout(jplRedLayout);
@@ -180,7 +199,7 @@ public class Grafico extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplRedLayout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jplRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGraficar3)
+                    .addComponent(btnGraficarRed)
                     .addComponent(rbtnNetOut)
                     .addComponent(rbtnNetIN)
                     .addComponent(rbtnNetTotal))
@@ -196,7 +215,7 @@ public class Grafico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(rbtnNetTotal)
                 .addGap(18, 18, 18)
-                .addComponent(btnGraficar3)
+                .addComponent(btnGraficarRed)
                 .addContainerGap())
         );
 
@@ -267,52 +286,204 @@ public class Grafico extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        this.dispose ();
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-        if (rbtnIdleTime.isSelected()&& rbtnSystemTime.isSelected()&& rbtnUserTime.isSelected()){
-            XYSeries series = new XYSeries("Producto A");
+    private void btnGraficarProcesadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarProcesadorActionPerformed
 
-        // Introduccion de datos
-        series.add(1, 1);
-        series.add(2, 6);
-        series.add(3, 3);
-        series.add(4, 10);
+        try {
+            XYSeries SystmeTime = new XYSeries("System Time");
+            XYSeries IdleTime = new XYSeries("Idle Time");
+            XYSeries UserTime = new XYSeries("User Time");
+            // Introduccion de datos
+            Workbook leerExcel = Workbook.getWorkbook(new File("Metricas.xls"));
+            Sheet pagina1 = leerExcel.getSheet(0);
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(series);
+            int filas = pagina1.getRows();
+            int muestra = 0;
+            for (int fila = 1; fila < filas; fila++) {
+                SystmeTime.add(muestra, (Double.parseDouble(pagina1.getCell(4, fila).getContents())));
+                UserTime.add(muestra, (Double.parseDouble(pagina1.getCell(5, fila).getContents())));
+                IdleTime.add(muestra, (Double.parseDouble(pagina1.getCell(6, fila).getContents())));
+                muestra++;
+            }
 
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "Ventas 2014", // Título
-                "Tiempo (x)", // Etiqueta Coordenada X
-                "Cantidad", // Etiqueta Coordenada Y
-                dataset, // Datos
-                PlotOrientation.VERTICAL,
-                true, // Muestra la leyenda de los productos (Producto A)
-                false,
-                false
-        );
+            //Seleciona que graficar
+            XYSeriesCollection dataset = new XYSeriesCollection();
+            if (rbtnIdleTime.isSelected() && rbtnSystemTime.isSelected() && rbtnUserTime.isSelected()) {
+                dataset.addSeries(IdleTime);
+                dataset.addSeries(SystmeTime);
+                dataset.addSeries(UserTime);
+            } else if (rbtnIdleTime.isSelected() && rbtnSystemTime.isSelected()) {
+                dataset.addSeries(IdleTime);
+                dataset.addSeries(SystmeTime);
+            } else if (rbtnSystemTime.isSelected() && rbtnUserTime.isSelected()) {
+                dataset.addSeries(SystmeTime);
+                dataset.addSeries(UserTime);
+            } else if (rbtnIdleTime.isSelected() && rbtnUserTime.isSelected()) {
+                dataset.addSeries(IdleTime);
+                dataset.addSeries(UserTime);
+            } else if (rbtnIdleTime.isSelected()) {
+                dataset.addSeries(IdleTime);
+            } else if (rbtnUserTime.isSelected()) {
+                dataset.addSeries(UserTime);
+            } else {
+                dataset.addSeries(SystmeTime);
+            }
 
-        // Mostramos la grafica en pantalla
-        ChartFrame frame = new ChartFrame("Ejemplo Grafica Lineal", chart);
-        frame.pack();
-        frame.setVisible(true);
-            
-            
+            JFreeChart chart = ChartFactory.createXYLineChart(
+                    "Grafico Porcesador", // Título del grafico
+                    "Muestras", // Etiqueta Coordenada X
+                    "Bytes por Segundo", // Etiqueta Coordenada Y
+                    dataset, // Datos
+                    PlotOrientation.VERTICAL,
+                    true, // Muestra la leyenda de los procesos
+                    false,
+                    false
+            );
+
+            // Mostramos la grafica en pantalla
+            ChartFrame frame = new ChartFrame("Grafico Procesador", chart);
+            frame.pack();
+            frame.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Grafico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(Grafico.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnGraficarActionPerformed
+
+    }//GEN-LAST:event_btnGraficarProcesadorActionPerformed
+
+    private void btnGraficarMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarMemoriaActionPerformed
+
+        try {
+            XYSeries MemoryInstalled = new XYSeries("Memoria Instalada");
+            XYSeries MemoryUsed = new XYSeries("Memoria en Uso");
+
+            // Introduccion de datos
+            Workbook leerExcel = Workbook.getWorkbook(new File("Metricas.xls"));
+            Sheet pagina1 = leerExcel.getSheet(0);
+
+            int filas = pagina1.getRows();
+            int muestra = 0;
+            for (int fila = 1; fila < filas; fila++) {
+                MemoryInstalled.add(muestra, (Double.parseDouble(pagina1.getCell(10, fila).getContents())));
+                MemoryUsed.add(muestra, (Double.parseDouble(pagina1.getCell(11, fila).getContents())));
+
+                muestra++;
+            }
+
+            //Seleciona que graficar
+            XYSeriesCollection dataset = new XYSeriesCollection();
+            if (rbtnTotalMemory.isSelected() && rbtnUsedMemory.isSelected()) {
+                dataset.addSeries(MemoryInstalled);
+                dataset.addSeries(MemoryUsed);
+            } else if (rbtnTotalMemory.isSelected()) {
+                dataset.addSeries(MemoryInstalled);
+            } else {
+                dataset.addSeries(MemoryUsed);
+            }
+
+            JFreeChart chart = ChartFactory.createXYLineChart(
+                    "Grafico Memoria", // Título del grafico
+                    "Muestras", // Etiqueta Coordenada X
+                    "Megabytes", // Etiqueta Coordenada Y
+                    dataset, // Datos
+                    PlotOrientation.VERTICAL,
+                    true, // Muestra la leyenda de los procesos
+                    false,
+                    false
+            );
+
+            // Mostramos la grafica en pantalla
+            ChartFrame frame = new ChartFrame("Grafico Memoria", chart);
+            frame.pack();
+            frame.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Grafico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(Grafico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnGraficarMemoriaActionPerformed
+
+    private void btnGraficarRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarRedActionPerformed
+
+        try {
+            XYSeries NetworkIn = new XYSeries("Network IN");
+            XYSeries NetworkOut = new XYSeries("Network OUT");
+            XYSeries NetworkTotal = new XYSeries("Network Total");
+            // Introduccion de datos
+            Workbook leerExcel = Workbook.getWorkbook(new File("Metricas.xls"));
+            Sheet pagina1 = leerExcel.getSheet(0);
+
+            int filas = pagina1.getRows();
+            int muestra = 0;
+            for (int fila = 1; fila < filas; fila++) {
+                NetworkIn.add(muestra, (Double.parseDouble(pagina1.getCell(7, fila).getContents())));
+                NetworkOut.add(muestra, (Double.parseDouble(pagina1.getCell(8, fila).getContents())));
+                NetworkTotal.add(muestra, (Double.parseDouble(pagina1.getCell(9, fila).getContents())));
+                muestra++;
+            }
+
+            //Seleciona que graficar
+            XYSeriesCollection dataset = new XYSeriesCollection();
+            if (rbtnNetIN.isSelected() && rbtnNetOut.isSelected() && rbtnNetTotal.isSelected()) {
+                dataset.addSeries(NetworkIn);
+                dataset.addSeries(NetworkOut);
+                dataset.addSeries(NetworkTotal);
+            } else if (rbtnNetIN.isSelected() && rbtnNetOut.isSelected()) {
+                dataset.addSeries(NetworkIn);
+                dataset.addSeries(NetworkOut);
+            } else if (rbtnNetIN.isSelected() && rbtnNetTotal.isSelected()) {
+                dataset.addSeries(NetworkIn);
+                dataset.addSeries(NetworkTotal);
+            } else if (rbtnNetOut.isSelected() && rbtnNetTotal.isSelected()) {
+                dataset.addSeries(NetworkOut);
+                dataset.addSeries(NetworkTotal);
+            } else if (rbtnNetIN.isSelected()) {
+                 dataset.addSeries(NetworkIn);                
+            } else if (rbtnNetOut.isSelected()) {
+                dataset.addSeries(NetworkOut);                
+            } else {
+                dataset.addSeries(NetworkTotal);
+            }
+
+            JFreeChart chart = ChartFactory.createXYLineChart(
+                    "Grafico Network", // Título del grafico
+                    "Muestras", // Etiqueta Coordenada X
+                    "Megabytes por Segundo", // Etiqueta Coordenada Y
+                    dataset, // Datos
+                    PlotOrientation.VERTICAL,
+                    true, // Muestra la leyenda de los procesos
+                    false,
+                    false
+            );
+
+            // Mostramos la grafica en pantalla
+            ChartFrame frame = new ChartFrame("Grafico Network", chart);
+            frame.pack();
+            frame.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Grafico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(Grafico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnGraficarRedActionPerformed
 
     private void configuracionVentana() {
-       this.setTitle("Reporte por gráficos");
+        this.setTitle("Reporte por gráficos");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGraficar;
-    private javax.swing.JButton btnGraficar1;
-    private javax.swing.JButton btnGraficar3;
+    private javax.swing.JButton btnGraficarMemoria;
+    private javax.swing.JButton btnGraficarProcesador;
+    private javax.swing.JButton btnGraficarRed;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jplMemory;
