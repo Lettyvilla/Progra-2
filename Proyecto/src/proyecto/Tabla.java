@@ -14,7 +14,7 @@ import org.apache.poi.ss.formula.eval.EvaluationException;
  * @author Carlos
  */
 public class Tabla extends javax.swing.JFrame {
-    Formulas For = new Formulas ();
+    
     
     
     /**
@@ -120,7 +120,6 @@ public class Tabla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        For.Creando();
         
     }//GEN-LAST:event_btnCalcularActionPerformed
 
