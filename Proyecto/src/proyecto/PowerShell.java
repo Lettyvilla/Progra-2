@@ -34,7 +34,7 @@ public class PowerShell extends Thread {
     private final String MEMORYUSED = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
-        "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKPOUT", "NETWORKTOTAL", "MemoryUsed"};
+        "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKOUT", "NETWORKTOTAL", "MemoryUsed"};
 
     private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, IDLETIME,
         NETWORKIN, NETWORKOUT, NETWORKTOTAL, MEMORYUSED};
@@ -116,27 +116,62 @@ public class PowerShell extends Thread {
                         stdInput.readLine();
                         stdInput.readLine();
                         stdInput.readLine();
-                        stdInput.readLine();                        
+                        stdInput.readLine();
+                        stdInput.readLine();                     
                         String[] result = stdInput.readLine().split(" ");
-                        String estado = result[26];
-                        //resultado += estado;
-                        long num = Long.parseLong(estado);
+                        String estado = result[26];                        
+                        double num = Double.parseDouble(estado);
                         num = ((num / 1024) / 1024);
                         datosCsv.agregarDato(num + ",");
-                        datosExcel.agregarDato(num +"");
-                        
+                        datosExcel.agregarDato(num +"");                        
+                        break;
+                    }
+                    case "NETWORKOUT": {
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();                     
+                        String[] result = stdInput.readLine().split(" ");
+                        String estado = result[26];                        
+                        double num = Double.parseDouble(estado);
+                        num = ((num / 1024) / 1024);
+                        datosCsv.agregarDato(num + ",");
+                        datosExcel.agregarDato(num +"");                        
+                        break;
+                    }
+                    case "NETWORKTOTAL": {
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();                     
+                        String[] result = stdInput.readLine().split(" ");
+                        String estado = result[26];                        
+                        double num = Double.parseDouble(estado);
+                        num = ((num / 1024) / 1024);
+                        datosCsv.agregarDato(num + ",");
+                        datosExcel.agregarDato(num +"");                        
                         break;
                     }
                     default: {
                         stdInput.readLine();
                         stdInput.readLine();
-                        stdInput.readLine();
-                        //stdInput.readLine();
+                        stdInput.readLine();                        
                         System.out.println(stdInput.readLine());
                         String[] result = stdInput.readLine().split(" ");
                         String estado = result[26];
-                        resultado += estado;
-                        //long num = Long.parseLong(estado);
+                        resultado += estado;                        
                         datosCsv.agregarDato(estado.trim() + ",");
                         datosExcel.agregarDato(estado.trim());
                         break;
