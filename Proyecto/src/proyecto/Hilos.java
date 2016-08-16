@@ -14,14 +14,14 @@ public class Hilos extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        try {
-//
-//            power.EncabezadosCsv();
-//            power.llamarComandoCsv(10, 1000);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+
+            power.EncabezadosCsv();
+            power.llamarComandoCsv(10, 1000);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }  
