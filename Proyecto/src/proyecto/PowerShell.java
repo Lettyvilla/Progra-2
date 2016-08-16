@@ -41,8 +41,13 @@ public class PowerShell extends Thread {
      private final String[] encabezados = {"Fecha y Hora","DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
      
+<<<<<<< HEAD
      private final String[] encabezadosxls = {"Hola","FechaHora","DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "Privilige Time","Network IN","Network OUT","Network TOTAL","Memory Total", "Memory Used"};
+=======
+     private final String[] encabezadosxls = {"Bievenido" ,"Fecha&Hora","DiskRead", "DiskWrite", "DiskTransfer",
+        "Processor_Time", "User_Time", "Privilige_Time","Network_IN","Network_OUT","Network_TOTAL","Memory_Total", "Memory_Used"};
+>>>>>>> origin/master
     
     private ColeccionDatos datosFinales = null;
     private ColeccionDatos datosFinales2 = null;
@@ -206,7 +211,10 @@ public class PowerShell extends Thread {
             fila = pagina.createRow(row + 1);
             rowCount = row + 1;
             String[] datos = lineas[row].split("\t");
+<<<<<<< HEAD
             System.out.println(datos);
+=======
+>>>>>>> origin/master
             for (int cells = 0; cells < datos.length; cells++) {
                 if (cells == 0) {
                     Cell celda = fila.createCell(cells);                    
