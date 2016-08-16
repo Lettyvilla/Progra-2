@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
@@ -271,15 +272,32 @@ public class Grafico extends javax.swing.JFrame {
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
         if (rbtnIdleTime.isSelected()&& rbtnSystemTime.isSelected()&& rbtnUserTime.isSelected()){
-            new Graficar();
-            XYSplineRenderer renderer = new XYSplineRenderer();
-            XYSeriesCollection dataset = new XYSeriesCollection();
+            XYSeries series = new XYSeries("Producto A");
 
-            ValueAxis x = new NumberAxis();
-            ValueAxis y = new NumberAxis();
+        // Introduccion de datos
+        series.add(1, 1);
+        series.add(2, 6);
+        series.add(3, 3);
+        series.add(4, 10);
 
-            XYSeries serie = new XYSeries("Datos");
-            XYPlot plot;
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series);
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Ventas 2014", // Título
+                "Tiempo (x)", // Etiqueta Coordenada X
+                "Cantidad", // Etiqueta Coordenada Y
+                dataset, // Datos
+                PlotOrientation.VERTICAL,
+                true, // Muestra la leyenda de los productos (Producto A)
+                false,
+                false
+        );
+
+        // Mostramos la grafica en pantalla
+        ChartFrame frame = new ChartFrame("Ejemplo Grafica Lineal", chart);
+        frame.pack();
+        frame.setVisible(true);
             
             
         }
