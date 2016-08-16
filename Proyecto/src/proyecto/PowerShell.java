@@ -29,21 +29,21 @@ public class PowerShell extends Thread {
     private final String USERTIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% user time'";
     private final String IDLETIME = "powershell.exe Get-Counter '" + "\\" + "processor(_total)" + "\\" + "% idle time'";
     private final String NETWORKIN = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes received/sec'";
-    private final String NETWORKPOUT = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes Sent/sec'";
+    private final String NETWORKOUT = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes Sent/sec'";
     private final String NETWORKTOTAL = "powershell.exe Get-Counter '" + "\\" + "Network Interface(*)" + "\\" + "bytes Total/sec'";
     private final String MEMORYUSED = "powershell.exe (get-wmiobject -class '" + "win32_physicalmemory'" + " -namespace '" + "root" + "\\" + "CIMV2'" + ").Capacity";
 
     private final String[] Procesos = {"DiskRead", "DiskWrite", "DiskTransfer",
         "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKPOUT", "NETWORKTOTAL", "MemoryUsed"};
-    
+
     private String[] comandos = {DISKREAD, DISKERITE, DISKTRANSFER, PROCESSORTIME, USERTIME, IDLETIME,
-        NETWORKIN, NETWORKPOUT, NETWORKTOTAL, MEMORYUSED};
+        NETWORKIN, NETWORKOUT, NETWORKTOTAL, MEMORYUSED};
 
     private final String[] encabezados = {"Fecha Hora", "Disk Read", "Disk Write", "Disk Transfer",
-        "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKPOUT", "NETWORKTOTAL", "Memory Intalled", "MemoryUsed"};
+        "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKOUT", "NETWORKTOTAL", "Memory Intalled", "MemoryUsed"};
 
     private final String[] encabezadosMetricas = {"Metrica", "Disk Read", "Disk Write", "Disk Transfer",
-        "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKPOUT", "NETWORKTOTAL", "Memory Intalled", "MemoryUsed"};
+        "Processor Time", "User Time", "idle Time", "NETWORKIN", "NETWORKOUT", "NETWORKTOTAL", "Memory Intalled", "MemoryUsed"};
 
     private ColeccionDatos datosExcel = null;
     private ColeccionDatos datosCsv = null;
@@ -95,8 +95,7 @@ public class PowerShell extends Thread {
                         stdInput.readLine();
                         stdInput.readLine();
                         stdInput.readLine();
-                        stdInput.readLine();
-                        //System.out.println(stdInput.readLine());
+                        stdInput.readLine();                        
                         linea = stdInput.readLine();
                         String[] partes = linea.split(" ");
                         resultado = partes[26];
@@ -106,6 +105,26 @@ public class PowerShell extends Thread {
                         total_mem = total_mem - mem_free;
                         datosCsv.agregarDato(total_mem + ",");
                         datosExcel.agregarDato(total_mem + "");
+                        break;
+                    }
+                    case "NETWORKIN": {
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();
+                        stdInput.readLine();                        
+                        String[] result = stdInput.readLine().split(" ");
+                        String estado = result[26];
+                        //resultado += estado;
+                        long num = Long.parseLong(estado);
+                        num = ((num / 1024) / 1024);
+                        datosCsv.agregarDato(num + ",");
+                        datosExcel.agregarDato(num +"");
+                        
                         break;
                     }
                     default: {
@@ -134,9 +153,9 @@ public class PowerShell extends Thread {
         archivo.escribirContenidoArchivo(datosCsv.devolverContenidoCsv());
         archivo.cerrarArchivoEscritura();
         JOptionPane.showMessageDialog(null, "Checkeo finalizado 2");
-        
+
         //Crea Archivo .xls
-        String contenidoExcel = datosExcel.devolverContenido();        
+        String contenidoExcel = datosExcel.devolverContenido();
         File archivo1 = new File("Metricas.xls");
         Workbook workbook = new HSSFWorkbook();
         Sheet pagina = workbook.createSheet("Datos");
