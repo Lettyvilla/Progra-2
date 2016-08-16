@@ -36,8 +36,11 @@ public class ColeccionDatos {
     public String devolverContenido() {
         String dato = "";
         for (String d : lista) {
+            if(d == "\n"){
+                dato += d;
+            }else{
             dato += d ;
-            dato += " ";
+            dato += "\t";}
         }
         return dato;
     }

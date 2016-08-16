@@ -9,13 +9,13 @@ public class Hilos extends Thread {
         super.run();
         try {
             
-            power.Encabezados();
-            power.llamarComando(2,1000);
+            //power.Encabezados();
+            power.llamarComando(30,1000);
             
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
+    /*    try {
 
             power.EncabezadosCsv();
             power.llamarComandoCsv(2,1000);
@@ -23,7 +23,7 @@ public class Hilos extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+     */   
     }
 }
     
