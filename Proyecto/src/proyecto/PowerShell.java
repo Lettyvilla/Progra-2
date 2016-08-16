@@ -109,7 +109,7 @@ public class PowerShell extends Thread {
                         break;
                     }
                     
-                    case ("NETWORKOUT"):{
+                    case ("NETWORKIN"):{
                         stdInput.readLine();
                         stdInput.readLine();
                         stdInput.readLine();

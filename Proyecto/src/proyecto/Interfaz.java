@@ -30,7 +30,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         btnTabla = new javax.swing.JButton();
         btnGrafico = new javax.swing.JButton();
-        btnCaptura = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,13 +48,6 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        btnCaptura.setText("Captura");
-        btnCaptura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapturaActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel1.setText("Proyecto-Progra 2");
 
@@ -70,7 +62,6 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(156, 156, 156)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCaptura, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -80,9 +71,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(75, 75, 75)
-                .addComponent(btnCaptura)
-                .addGap(18, 18, 18)
+                .addGap(116, 116, 116)
                 .addComponent(btnTabla)
                 .addGap(18, 18, 18)
                 .addComponent(btnGrafico)
@@ -96,7 +85,7 @@ public class Interfaz extends javax.swing.JFrame {
         Tabla venTabla = new Tabla();
     }//GEN-LAST:event_btnTablaActionPerformed
 
-    private void btnCapturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
         CapturaDatos venCaptura = new CapturaDatos ();
         venCaptura.setVisible(rootPaneCheckingEnabled);
 
@@ -108,7 +97,6 @@ public class Interfaz extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCaptura;
     private javax.swing.JButton btnGrafico;
     private javax.swing.JButton btnTabla;
     private javax.swing.JLabel jLabel1;
