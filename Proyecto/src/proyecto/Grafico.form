@@ -82,9 +82,9 @@
                   <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnGraficar" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnIdleTime" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnSystemTime" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnUserTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnIdleTime" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnSystemTime" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnUserTime" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
@@ -94,11 +94,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="rdnSystemTime" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnSystemTime" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rdnIdleTime" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnIdleTime" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rdnUserTime" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnUserTime" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnGraficar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -107,31 +107,34 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="rdnSystemTime">
+        <Component class="javax.swing.JRadioButton" name="rbtnSystemTime">
           <Properties>
             <Property name="text" type="java.lang.String" value="System Time"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdnIdleTime">
+        <Component class="javax.swing.JRadioButton" name="rbtnIdleTime">
           <Properties>
             <Property name="text" type="java.lang.String" value="Idle Time"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdnIdleTimeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnIdleTimeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdnUserTime">
+        <Component class="javax.swing.JRadioButton" name="rbtnUserTime">
           <Properties>
             <Property name="text" type="java.lang.String" value="User Time"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdnUserTimeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnUserTimeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGraficar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Graficar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -163,8 +166,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="rdnUsedMemory" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnTotalMemory" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnUsedMemory" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnTotalMemory" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
@@ -174,9 +177,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="rdnTotalMemory" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnTotalMemory" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rdnUsedMemory" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnUsedMemory" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnGraficar1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -185,20 +188,20 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="rdnTotalMemory">
+        <Component class="javax.swing.JRadioButton" name="rbtnTotalMemory">
           <Properties>
             <Property name="text" type="java.lang.String" value="Memoria Instalada"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdnTotalMemoryActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnTotalMemoryActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdnUsedMemory">
+        <Component class="javax.swing.JRadioButton" name="rbtnUsedMemory">
           <Properties>
             <Property name="text" type="java.lang.String" value="Memoria en Uso"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdnUsedMemoryActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnUsedMemoryActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGraficar1">
@@ -224,9 +227,9 @@
                   <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnGraficar3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnNetOut" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnNetIN" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="rdnNetTotal" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnNetOut" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnNetIN" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnNetTotal" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
@@ -236,11 +239,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="11" max="32767" attributes="0"/>
-                  <Component id="rdnNetIN" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnNetIN" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rdnNetOut" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnNetOut" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rdnNetTotal" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbtnNetTotal" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnGraficar3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -249,25 +252,25 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="rdnNetIN">
+        <Component class="javax.swing.JRadioButton" name="rbtnNetIN">
           <Properties>
             <Property name="text" type="java.lang.String" value="MB In"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdnNetOut">
+        <Component class="javax.swing.JRadioButton" name="rbtnNetOut">
           <Properties>
             <Property name="text" type="java.lang.String" value="MB Out"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdnNetOutActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnNetOutActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdnNetTotal">
+        <Component class="javax.swing.JRadioButton" name="rbtnNetTotal">
           <Properties>
             <Property name="text" type="java.lang.String" value="MB Total"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdnNetTotalActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnNetTotalActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGraficar3">

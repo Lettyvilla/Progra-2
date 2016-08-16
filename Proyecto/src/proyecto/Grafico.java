@@ -1,5 +1,25 @@
 package proyecto;
 
+import java.awt.Panel;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+
+import org.jfree.chart.renderer.xy.XYSplineRenderer;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.axis.*;
+import org.jfree.data.xy.*;
+
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.category.DefaultIntervalCategoryDataset;
+
+import org.jfree.data.general.DefaultPieDataset;
+
 public class Grafico extends javax.swing.JFrame {
     public Grafico() {
         initComponents();
@@ -10,19 +30,19 @@ public class Grafico extends javax.swing.JFrame {
     private void initComponents() {
 
         jplProcesador = new javax.swing.JPanel();
-        rdnSystemTime = new javax.swing.JRadioButton();
-        rdnIdleTime = new javax.swing.JRadioButton();
-        rdnUserTime = new javax.swing.JRadioButton();
+        rbtnSystemTime = new javax.swing.JRadioButton();
+        rbtnIdleTime = new javax.swing.JRadioButton();
+        rbtnUserTime = new javax.swing.JRadioButton();
         btnGraficar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jplMemory = new javax.swing.JPanel();
-        rdnTotalMemory = new javax.swing.JRadioButton();
-        rdnUsedMemory = new javax.swing.JRadioButton();
+        rbtnTotalMemory = new javax.swing.JRadioButton();
+        rbtnUsedMemory = new javax.swing.JRadioButton();
         btnGraficar1 = new javax.swing.JButton();
         jplRed = new javax.swing.JPanel();
-        rdnNetIN = new javax.swing.JRadioButton();
-        rdnNetOut = new javax.swing.JRadioButton();
-        rdnNetTotal = new javax.swing.JRadioButton();
+        rbtnNetIN = new javax.swing.JRadioButton();
+        rbtnNetOut = new javax.swing.JRadioButton();
+        rbtnNetTotal = new javax.swing.JRadioButton();
         btnGraficar3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -30,23 +50,28 @@ public class Grafico extends javax.swing.JFrame {
 
         jplProcesador.setBorder(javax.swing.BorderFactory.createTitledBorder("Procesador"));
 
-        rdnSystemTime.setText("System Time");
+        rbtnSystemTime.setText("System Time");
 
-        rdnIdleTime.setText("Idle Time");
-        rdnIdleTime.addActionListener(new java.awt.event.ActionListener() {
+        rbtnIdleTime.setText("Idle Time");
+        rbtnIdleTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdnIdleTimeActionPerformed(evt);
+                rbtnIdleTimeActionPerformed(evt);
             }
         });
 
-        rdnUserTime.setText("User Time");
-        rdnUserTime.addActionListener(new java.awt.event.ActionListener() {
+        rbtnUserTime.setText("User Time");
+        rbtnUserTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdnUserTimeActionPerformed(evt);
+                rbtnUserTimeActionPerformed(evt);
             }
         });
 
         btnGraficar.setText("Graficar");
+        btnGraficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jplProcesadorLayout = new javax.swing.GroupLayout(jplProcesador);
         jplProcesador.setLayout(jplProcesadorLayout);
@@ -56,20 +81,20 @@ public class Grafico extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jplProcesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGraficar)
-                    .addComponent(rdnIdleTime)
-                    .addComponent(rdnSystemTime)
-                    .addComponent(rdnUserTime))
+                    .addComponent(rbtnIdleTime)
+                    .addComponent(rbtnSystemTime)
+                    .addComponent(rbtnUserTime))
                 .addGap(21, 21, 21))
         );
         jplProcesadorLayout.setVerticalGroup(
             jplProcesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jplProcesadorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rdnSystemTime)
+                .addComponent(rbtnSystemTime)
                 .addGap(18, 18, 18)
-                .addComponent(rdnIdleTime)
+                .addComponent(rbtnIdleTime)
                 .addGap(18, 18, 18)
-                .addComponent(rdnUserTime)
+                .addComponent(rbtnUserTime)
                 .addGap(18, 18, 18)
                 .addComponent(btnGraficar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -84,17 +109,17 @@ public class Grafico extends javax.swing.JFrame {
 
         jplMemory.setBorder(javax.swing.BorderFactory.createTitledBorder("Memoria"));
 
-        rdnTotalMemory.setText("Memoria Instalada");
-        rdnTotalMemory.addActionListener(new java.awt.event.ActionListener() {
+        rbtnTotalMemory.setText("Memoria Instalada");
+        rbtnTotalMemory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdnTotalMemoryActionPerformed(evt);
+                rbtnTotalMemoryActionPerformed(evt);
             }
         });
 
-        rdnUsedMemory.setText("Memoria en Uso");
-        rdnUsedMemory.addActionListener(new java.awt.event.ActionListener() {
+        rbtnUsedMemory.setText("Memoria en Uso");
+        rbtnUsedMemory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdnUsedMemoryActionPerformed(evt);
+                rbtnUsedMemoryActionPerformed(evt);
             }
         });
 
@@ -111,17 +136,17 @@ public class Grafico extends javax.swing.JFrame {
             .addGroup(jplMemoryLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jplMemoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdnUsedMemory)
-                    .addComponent(rdnTotalMemory))
+                    .addComponent(rbtnUsedMemory)
+                    .addComponent(rbtnTotalMemory))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jplMemoryLayout.setVerticalGroup(
             jplMemoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplMemoryLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(rdnTotalMemory)
+                .addComponent(rbtnTotalMemory)
                 .addGap(18, 18, 18)
-                .addComponent(rdnUsedMemory)
+                .addComponent(rbtnUsedMemory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGraficar1)
                 .addContainerGap())
@@ -129,19 +154,19 @@ public class Grafico extends javax.swing.JFrame {
 
         jplRed.setBorder(javax.swing.BorderFactory.createTitledBorder("Red"));
 
-        rdnNetIN.setText("MB In");
+        rbtnNetIN.setText("MB In");
 
-        rdnNetOut.setText("MB Out");
-        rdnNetOut.addActionListener(new java.awt.event.ActionListener() {
+        rbtnNetOut.setText("MB Out");
+        rbtnNetOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdnNetOutActionPerformed(evt);
+                rbtnNetOutActionPerformed(evt);
             }
         });
 
-        rdnNetTotal.setText("MB Total");
-        rdnNetTotal.addActionListener(new java.awt.event.ActionListener() {
+        rbtnNetTotal.setText("MB Total");
+        rbtnNetTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdnNetTotalActionPerformed(evt);
+                rbtnNetTotalActionPerformed(evt);
             }
         });
 
@@ -155,20 +180,20 @@ public class Grafico extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jplRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGraficar3)
-                    .addComponent(rdnNetOut)
-                    .addComponent(rdnNetIN)
-                    .addComponent(rdnNetTotal))
+                    .addComponent(rbtnNetOut)
+                    .addComponent(rbtnNetIN)
+                    .addComponent(rbtnNetTotal))
                 .addGap(19, 19, 19))
         );
         jplRedLayout.setVerticalGroup(
             jplRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplRedLayout.createSequentialGroup()
                 .addContainerGap(11, Short.MAX_VALUE)
-                .addComponent(rdnNetIN)
+                .addComponent(rbtnNetIN)
                 .addGap(18, 18, 18)
-                .addComponent(rdnNetOut)
+                .addComponent(rbtnNetOut)
                 .addGap(18, 18, 18)
-                .addComponent(rdnNetTotal)
+                .addComponent(rbtnNetTotal)
                 .addGap(18, 18, 18)
                 .addComponent(btnGraficar3)
                 .addContainerGap())
@@ -215,34 +240,50 @@ public class Grafico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdnIdleTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnIdleTimeActionPerformed
+    private void rbtnIdleTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnIdleTimeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdnIdleTimeActionPerformed
+    }//GEN-LAST:event_rbtnIdleTimeActionPerformed
 
-    private void rdnUserTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnUserTimeActionPerformed
+    private void rbtnUserTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnUserTimeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdnUserTimeActionPerformed
+    }//GEN-LAST:event_rbtnUserTimeActionPerformed
 
-    private void rdnUsedMemoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnUsedMemoryActionPerformed
+    private void rbtnUsedMemoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnUsedMemoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdnUsedMemoryActionPerformed
+    }//GEN-LAST:event_rbtnUsedMemoryActionPerformed
 
-    private void rdnNetOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnNetOutActionPerformed
+    private void rbtnNetOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNetOutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdnNetOutActionPerformed
+    }//GEN-LAST:event_rbtnNetOutActionPerformed
 
-    private void rdnNetTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnNetTotalActionPerformed
+    private void rbtnNetTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNetTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdnNetTotalActionPerformed
+    }//GEN-LAST:event_rbtnNetTotalActionPerformed
 
-    private void rdnTotalMemoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdnTotalMemoryActionPerformed
+    private void rbtnTotalMemoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTotalMemoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdnTotalMemoryActionPerformed
+    }//GEN-LAST:event_rbtnTotalMemoryActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
         this.dispose ();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
+        if (rbtnIdleTime.isSelected()&& rbtnSystemTime.isSelected()&& rbtnUserTime.isSelected()){
+            new Graficar();
+            XYSplineRenderer renderer = new XYSplineRenderer();
+            XYSeriesCollection dataset = new XYSeriesCollection();
+
+            ValueAxis x = new NumberAxis();
+            ValueAxis y = new NumberAxis();
+
+            XYSeries serie = new XYSeries("Datos");
+            XYPlot plot;
+            
+            
+        }
+    }//GEN-LAST:event_btnGraficarActionPerformed
 
     private void configuracionVentana() {
        this.setTitle("Reporte por gráficos");
@@ -253,24 +294,19 @@ public class Grafico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnGraficar1;
-    private javax.swing.JButton btnGraficar2;
     private javax.swing.JButton btnGraficar3;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jplMemory;
     private javax.swing.JPanel jplProcesador;
-    private javax.swing.JPanel jplProcesador2;
     private javax.swing.JPanel jplRed;
-    private javax.swing.JRadioButton rdnIdleTime;
-    private javax.swing.JRadioButton rdnIdleTime2;
-    private javax.swing.JRadioButton rdnNetIN;
-    private javax.swing.JRadioButton rdnNetOut;
-    private javax.swing.JRadioButton rdnNetTotal;
-    private javax.swing.JRadioButton rdnSystemTime;
-    private javax.swing.JRadioButton rdnSystemTime2;
-    private javax.swing.JRadioButton rdnTotalMemory;
-    private javax.swing.JRadioButton rdnUsedMemory;
-    private javax.swing.JRadioButton rdnUserTime;
-    private javax.swing.JRadioButton rdnUserTime2;
+    private javax.swing.JRadioButton rbtnIdleTime;
+    private javax.swing.JRadioButton rbtnNetIN;
+    private javax.swing.JRadioButton rbtnNetOut;
+    private javax.swing.JRadioButton rbtnNetTotal;
+    private javax.swing.JRadioButton rbtnSystemTime;
+    private javax.swing.JRadioButton rbtnTotalMemory;
+    private javax.swing.JRadioButton rbtnUsedMemory;
+    private javax.swing.JRadioButton rbtnUserTime;
     // End of variables declaration//GEN-END:variables
 }

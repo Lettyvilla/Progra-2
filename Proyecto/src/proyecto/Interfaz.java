@@ -103,7 +103,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCapturaActionPerformed
 
     private void btnGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficoActionPerformed
-        Grafico venGratico = new Grafico();
+        Grafico venGrafico = new Grafico();
     }//GEN-LAST:event_btnGraficoActionPerformed
 
 
