@@ -49,6 +49,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jLabel1.setFont(new java.awt.Font("Serif", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 204));
         jLabel1.setText(" Power Shell");
@@ -59,12 +60,17 @@ public class Interfaz extends javax.swing.JFrame {
                 btnCaptura2ActionPerformed(evt);
             }
         });
+=======
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        jLabel1.setText("Proyecto-Progra 2");
+>>>>>>> origin/master
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
@@ -76,15 +82,26 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(136, 136, 136)
                         .addComponent(jLabel1)))
                 .addContainerGap(138, Short.MAX_VALUE))
+=======
+                .addGap(156, 156, 156)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> origin/master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+<<<<<<< HEAD
                 .addGap(57, 57, 57)
                 .addComponent(btnCaptura2)
                 .addGap(36, 36, 36)
+=======
+                .addGap(116, 116, 116)
+>>>>>>> origin/master
                 .addComponent(btnTabla)
                 .addGap(18, 18, 18)
                 .addComponent(btnGrafico)
@@ -98,7 +115,13 @@ public class Interfaz extends javax.swing.JFrame {
         Tabla venTabla = new Tabla();
     }//GEN-LAST:event_btnTablaActionPerformed
 
+<<<<<<< HEAD
     private void btnCapturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
+=======
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaActionPerformed
+        CapturaDatos venCaptura = new CapturaDatos ();
+        venCaptura.setVisible(rootPaneCheckingEnabled);
+>>>>>>> origin/master
 
     }//GEN-LAST:event_btnCapturaActionPerformed
 
@@ -114,7 +137,10 @@ public class Interfaz extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton btnCaptura2;
+=======
+>>>>>>> origin/master
     private javax.swing.JButton btnGrafico;
     private javax.swing.JButton btnTabla;
     private javax.swing.JLabel jLabel1;
