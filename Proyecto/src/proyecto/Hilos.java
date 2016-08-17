@@ -8,7 +8,7 @@ public class Hilos extends Thread {
     public void run() {        
         try {
             power.EncabezadosCsv();
-            power.CapturaDatos(10);
+            power.CapturaDatos(15);
             
             
 
