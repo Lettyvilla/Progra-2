@@ -5,11 +5,12 @@ public class Hilos extends Thread {
     PowerShell power = new PowerShell();
 
     @Override
-    public void run() {
-        super.run();
+    public void run() {        
         try {
             power.EncabezadosCsv();
-            power.CapturaDatos(30, 1000);
+            power.CapturaDatos(10);
+            
+            
 
         } catch (Exception e) {
             e.printStackTrace();

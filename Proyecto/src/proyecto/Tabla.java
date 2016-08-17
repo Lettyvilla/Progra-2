@@ -159,8 +159,7 @@ public class Tabla extends javax.swing.JFrame {
                             for (int columna =0; columna<columnas; columna++){
                                 if (fila==0){
                                     modelo.addColumn(pagina1.getCell(columna, fila).getContents());
-                                }
-                                System.out.println(pagina1.getCell(columna, fila).getContents());
+                                }                                
                                 if (fila>=1)
                                     data[columna] = pagina1.getCell(columna, fila).getContents();
                             }

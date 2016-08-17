@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jxl.read.biff.BiffException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -64,7 +65,7 @@ public class PowerShell extends Thread {
         datosCsv.agregarDato("\n");
     }
 
-    public void CapturaDatos(int veces, int tiempo) throws IOException, InterruptedException {
+    public void CapturaDatos(int veces) throws IOException, InterruptedException, BiffException {
         String resultado = " ";
 
         for (int i = 0; i < veces; i++) {
@@ -180,7 +181,8 @@ public class PowerShell extends Thread {
                 posNombre++;
             }
             datosCsv.agregarDato("\n");
-            datosExcel.agregarDato("\n");
+            datosExcel.agregarDato("\n");            
+            
         }
         //Crea el archivo CSV
         AdministradorArchivos archivo = new AdministradorArchivos();
@@ -232,147 +234,153 @@ public class PowerShell extends Thread {
         String[] formulas = {"Suma", "Promedio", "Percentil 95", "Maximo", "Minimo"};
         for (int fileFor = 0; fileFor < formulas.length; fileFor++) {
             fila = pagina1.createRow(fileFor + 1);
+            
+            jxl.Workbook leerExcel = jxl.Workbook.getWorkbook(new File("Metricas.xls"));
+            jxl.Sheet datos = leerExcel.getSheet(0);
+
+            int filas = datos.getRows();
+            int muestra = 0;
 
             switch (fileFor) {
                 case 0:
                     Cell celdaA = fila.createCell(0);
                     celdaA.setCellValue(formulas[0]);
                     Cell celdaB = fila.createCell(1);
-                    celdaB.setCellFormula("SUM(Datos!B2:B34)");
+                    celdaB.setCellFormula("SUM(Datos!B2:B"+filas+")");
                     Cell celdaC = fila.createCell(2);
-                    celdaC.setCellFormula("SUM(Datos!C2:C34)");
+                    celdaC.setCellFormula("SUM(Datos!C2:C"+filas+")");
                     Cell celdaD = fila.createCell(3);
-                    celdaD.setCellFormula("SUM(Datos!D2:D34)");
+                    celdaD.setCellFormula("SUM(Datos!D2:D"+filas+")");
                     Cell celdaE = fila.createCell(4);
-                    celdaE.setCellFormula("SUM(Datos!E2:E34)");
+                    celdaE.setCellFormula("SUM(Datos!E2:E"+filas+")");
                     Cell celdaF = fila.createCell(5);
-                    celdaF.setCellFormula("SUM(Datos!F2:F34)");
+                    celdaF.setCellFormula("SUM(Datos!F2:F"+filas+")");
                     Cell celdaG = fila.createCell(6);
-                    celdaG.setCellFormula("SUM(Datos!G2:G34)");
+                    celdaG.setCellFormula("SUM(Datos!G2:G"+filas+")");
                     Cell celdaH = fila.createCell(7);
-                    celdaH.setCellFormula("SUM(Datos!H2:H34)");
+                    celdaH.setCellFormula("SUM(Datos!H2:H"+filas+")");
                     Cell celdaI = fila.createCell(8);
-                    celdaI.setCellFormula("SUM(Datos!I2:I34)");
+                    celdaI.setCellFormula("SUM(Datos!I2:I"+filas+")");
                     Cell celdaJ = fila.createCell(9);
-                    celdaJ.setCellFormula("SUM(Datos!J2:J34)");
+                    celdaJ.setCellFormula("SUM(Datos!J2:J"+filas+")");
                     Cell celdaK = fila.createCell(10);
-                    celdaK.setCellFormula("SUM(Datos!K2:K34)");
+                    celdaK.setCellFormula("SUM(Datos!K2:K"+filas+")");
                     Cell celdaL = fila.createCell(11);
-                    celdaL.setCellFormula("SUM(Datos!L2:L34)");
+                    celdaL.setCellFormula("SUM(Datos!L2:L"+filas+")");
                     break;
                 case 1:
                     Cell celdaA1 = fila.createCell(0);
                     celdaA1.setCellValue(formulas[1]);
                     Cell celdaB1 = fila.createCell(1);
-                    celdaB1.setCellFormula("AVERAGE(Datos!B2:B34)");
+                    celdaB1.setCellFormula("AVERAGE(Datos!B2:B"+filas+")");
                     Cell celdaC1 = fila.createCell(2);
-                    celdaC1.setCellFormula("AVERAGE(Datos!C2:C34)");
+                    celdaC1.setCellFormula("AVERAGE(Datos!C2:C"+filas+")");
                     Cell celdaD1 = fila.createCell(3);
-                    celdaD1.setCellFormula("AVERAGE(Datos!D2:D34)");
+                    celdaD1.setCellFormula("AVERAGE(Datos!D2:D"+filas+")");
                     Cell celdaE1 = fila.createCell(4);
-                    celdaE1.setCellFormula("AVERAGE(Datos!E2:E34)");
+                    celdaE1.setCellFormula("AVERAGE(Datos!E2:E"+filas+")");
                     Cell celdaF1 = fila.createCell(5);
-                    celdaF1.setCellFormula("AVERAGE(Datos!F2:F34)");
+                    celdaF1.setCellFormula("AVERAGE(Datos!F2:F"+filas+")");
                     Cell celdaG1 = fila.createCell(6);
-                    celdaG1.setCellFormula("AVERAGE(Datos!G2:G34)");
+                    celdaG1.setCellFormula("AVERAGE(Datos!G2:G"+filas+")");
                     Cell celdaH1 = fila.createCell(7);
-                    celdaH1.setCellFormula("AVERAGE(Datos!H2:H34)");
+                    celdaH1.setCellFormula("AVERAGE(Datos!H2:H"+filas+")");
                     Cell celdaI1 = fila.createCell(8);
-                    celdaI1.setCellFormula("AVERAGE(Datos!I2:I34)");
+                    celdaI1.setCellFormula("AVERAGE(Datos!I2:I"+filas+")");
                     Cell celdaJ1 = fila.createCell(9);
-                    celdaJ1.setCellFormula("AVERAGE(Datos!J2:J34)");
+                    celdaJ1.setCellFormula("AVERAGE(Datos!J2:J"+filas+")");
                     Cell celdaK1 = fila.createCell(10);
-                    celdaK1.setCellFormula("AVERAGE(Datos!K2:K34)");
+                    celdaK1.setCellFormula("AVERAGE(Datos!K2:K"+filas+")");
                     Cell celdaL1 = fila.createCell(11);
-                    celdaL1.setCellFormula("AVERAGE(Datos!L2:L34)");
+                    celdaL1.setCellFormula("AVERAGE(Datos!L2:L"+filas+")");
                     break;
                 case 2:
                     Cell celdaA2 = fila.createCell(0);
                     celdaA2.setCellValue(formulas[2]);
                     Cell celdaB2 = fila.createCell(1);
-                    celdaB2.setCellFormula("PERCENTILE(Datos!B2:B34,0.95)");
+                    celdaB2.setCellFormula("PERCENTILE(Datos!B2:B"+filas+",0.95)");
                     Cell celdaC2 = fila.createCell(2);
                     celdaC2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaC2.setCellFormula("PERCENTILE(Datos!C2:C34,0.95)");
+                    celdaC2.setCellFormula("PERCENTILE(Datos!C2:C"+filas+",0.95)");
                     Cell celdaD2 = fila.createCell(3);
                     celdaD2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaD2.setCellFormula("PERCENTILE(Datos!D2:D34,0.95)");
+                    celdaD2.setCellFormula("PERCENTILE(Datos!D2:D"+filas+",0.95)");
                     Cell celdaE2 = fila.createCell(4);
                     celdaE2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaE2.setCellFormula("PERCENTILE(Datos!E2:E34,0.95)");
+                    celdaE2.setCellFormula("PERCENTILE(Datos!E2:E"+filas+",0.95)");
                     Cell celdaF2 = fila.createCell(5);
                     celdaF2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaF2.setCellFormula("PERCENTILE(Datos!F2:F34,0.95)");
+                    celdaF2.setCellFormula("PERCENTILE(Datos!F2:F"+filas+",0.95)");
                     Cell celdaG2 = fila.createCell(6);
                     celdaG2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaG2.setCellFormula("PERCENTILE(Datos!G2:G34,0.95)");
+                    celdaG2.setCellFormula("PERCENTILE(Datos!G2:G"+filas+",0.95)");
                     Cell celdaH2 = fila.createCell(7);
                     celdaH2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaH2.setCellFormula("PERCENTILE(Datos!H2:H34,0.95)");
+                    celdaH2.setCellFormula("PERCENTILE(Datos!H2:H"+filas+",0.95)");
                     Cell celdaI2 = fila.createCell(8);
                     celdaI2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaI2.setCellFormula("PERCENTILE(Datos!I2:I34,0.95)");
+                    celdaI2.setCellFormula("PERCENTILE(Datos!I2:I"+filas+",0.95)");
                     Cell celdaJ2 = fila.createCell(9);
                     celdaJ2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaJ2.setCellFormula("PERCENTILE(Datos!J2:J34,0.95)");
+                    celdaJ2.setCellFormula("PERCENTILE(Datos!J2:J"+filas+",0.95)");
                     Cell celdaK2 = fila.createCell(10);
                     celdaK2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaK2.setCellFormula("PERCENTILE(Datos!K2:K34,0.95)");
+                    celdaK2.setCellFormula("PERCENTILE(Datos!K2:K"+filas+",0.95)");
                     Cell celdaL2 = fila.createCell(11);
                     celdaL2.setCellType(Cell.CELL_TYPE_FORMULA);
-                    celdaL2.setCellFormula("PERCENTILE(Datos!L2:L34,0.95)");
+                    celdaL2.setCellFormula("PERCENTILE(Datos!L2:L"+filas+",0.95)");
                     break;
                 case 3:
                     Cell celdaA3 = fila.createCell(0);
                     celdaA3.setCellValue(formulas[3]);
                     Cell celdaB3 = fila.createCell(1);
-                    celdaB3.setCellFormula("MAX(Datos!B2:B34)");
+                    celdaB3.setCellFormula("MAX(Datos!B2:B"+filas+")");
                     Cell celdaC3 = fila.createCell(2);
-                    celdaC3.setCellFormula("MAX(Datos!C2:C34)");
+                    celdaC3.setCellFormula("MAX(Datos!C2:C"+filas+")");
                     Cell celdaD3 = fila.createCell(3);
-                    celdaD3.setCellFormula("MAX(Datos!D2:D34)");
+                    celdaD3.setCellFormula("MAX(Datos!D2:D"+filas+")");
                     Cell celdaE3 = fila.createCell(4);
-                    celdaE3.setCellFormula("MAX(Datos!E2:E34)");
+                    celdaE3.setCellFormula("MAX(Datos!E2:E"+filas+")");
                     Cell celdaF3 = fila.createCell(5);
-                    celdaF3.setCellFormula("MAX(Datos!F2:F34)");
+                    celdaF3.setCellFormula("MAX(Datos!F2:F"+filas+")");
                     Cell celdaG3 = fila.createCell(6);
-                    celdaG3.setCellFormula("MAX(Datos!G2:G34)");
+                    celdaG3.setCellFormula("MAX(Datos!G2:G"+filas+")");
                     Cell celdaH3 = fila.createCell(7);
-                    celdaH3.setCellFormula("MAX(Datos!H2:H34)");
+                    celdaH3.setCellFormula("MAX(Datos!H2:H"+filas+")");
                     Cell celdaI3 = fila.createCell(8);
-                    celdaI3.setCellFormula("MAX(Datos!I2:I34)");
+                    celdaI3.setCellFormula("MAX(Datos!I2:I"+filas+")");
                     Cell celdaJ3 = fila.createCell(9);
-                    celdaJ3.setCellFormula("MAX(Datos!J2:J34)");
+                    celdaJ3.setCellFormula("MAX(Datos!J2:J"+filas+")");
                     Cell celdaK3 = fila.createCell(10);
-                    celdaK3.setCellFormula("MAX(Datos!K2:K34)");
+                    celdaK3.setCellFormula("MAX(Datos!K2:K"+filas+")");
                     Cell celdaL3 = fila.createCell(11);
-                    celdaL3.setCellFormula("MAX(Datos!L2:L34)");
+                    celdaL3.setCellFormula("MAX(Datos!L2:L"+filas+")");
                     break;
                 case 4:
                     Cell celdaA4 = fila.createCell(0);
                     celdaA4.setCellValue(formulas[4]);
                     Cell celdaB4 = fila.createCell(1);
-                    celdaB4.setCellFormula("MIN(Datos!B2:B34)");
+                    celdaB4.setCellFormula("MIN(Datos!B2:B"+filas+")");
                     Cell celdaC4 = fila.createCell(2);
-                    celdaC4.setCellFormula("MIN(Datos!C2:C34)");
+                    celdaC4.setCellFormula("MIN(Datos!C2:C"+filas+")");
                     Cell celdaD4 = fila.createCell(3);
-                    celdaD4.setCellFormula("MIN(Datos!D2:D34)");
+                    celdaD4.setCellFormula("MIN(Datos!D2:D"+filas+")");
                     Cell celdaE4 = fila.createCell(4);
-                    celdaE4.setCellFormula("MIN(Datos!E2:E34)");
+                    celdaE4.setCellFormula("MIN(Datos!E2:E"+filas+")");
                     Cell celdaF4 = fila.createCell(5);
-                    celdaF4.setCellFormula("MIN(Datos!F2:F34)");
+                    celdaF4.setCellFormula("MIN(Datos!F2:F"+filas+")");
                     Cell celdaG4 = fila.createCell(6);
-                    celdaG4.setCellFormula("MIN(Datos!G2:G34)");
+                    celdaG4.setCellFormula("MIN(Datos!G2:G"+filas+")");
                     Cell celdaH4 = fila.createCell(7);
-                    celdaH4.setCellFormula("MIN(Datos!H2:H34)");
+                    celdaH4.setCellFormula("MIN(Datos!H2:H"+filas+")");
                     Cell celdaI4 = fila.createCell(8);
-                    celdaI4.setCellFormula("MIN(Datos!I2:I34)");
+                    celdaI4.setCellFormula("MIN(Datos!I2:I"+filas+")");
                     Cell celdaJ4 = fila.createCell(9);
-                    celdaJ4.setCellFormula("MIN(Datos!J2:J34)");
+                    celdaJ4.setCellFormula("MIN(Datos!J2:J"+filas+")");
                     Cell celdaK4 = fila.createCell(10);
-                    celdaK4.setCellFormula("MIN(Datos!K2:K34)");
+                    celdaK4.setCellFormula("MIN(Datos!K2:K"+filas+")");
                     Cell celdaL4 = fila.createCell(11);
-                    celdaL4.setCellFormula("MIN(Datos!L2:L34)");
+                    celdaL4.setCellFormula("MIN(Datos!L2:L"+filas+")");
                     break;
                 default:
                     break;
