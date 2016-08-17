@@ -169,7 +169,7 @@ public class PowerShell extends Thread {
                         stdInput.readLine();
                         stdInput.readLine();
                         stdInput.readLine();
-                        System.out.println(stdInput.readLine());
+                        stdInput.readLine();
                         String[] result = stdInput.readLine().split(" ");
                         String estado = result[26];
                         resultado += estado;
@@ -184,10 +184,11 @@ public class PowerShell extends Thread {
             datosExcel.agregarDato("\n");
 
         }
+        System.out.println("Lectura completa: " + veces);
 
-    }
+    
 
-    public void CrearArchivos() throws IOException, BiffException {
+    
         //Crea el archivo CSV
         AdministradorArchivos archivo = new AdministradorArchivos();
         archivo.abrirArchivoEscritura("distribucionDatos.csv");
@@ -405,5 +406,5 @@ public class PowerShell extends Thread {
             fnfe.printStackTrace();
         }
 
-    }
+    }   
 }

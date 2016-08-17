@@ -8,11 +8,7 @@ public class Hilos extends Thread {
     public void run() {        
         try {
             power.EncabezadosCsv();
-            power.CapturaDatos(15);
-            power.CrearArchivos();
-            
-            
-
+            power.CapturaDatos(5);  
         } catch (Exception e) {
             e.printStackTrace();
         }     
